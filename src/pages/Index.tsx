@@ -8,8 +8,7 @@ import {
   Globe, 
   Award, 
   CheckCircle,
-  ArrowRight,
-  Star
+  ArrowRight
 } from "lucide-react";
 
 const Index = () => {
@@ -41,38 +40,38 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-4xl font-bold text-red-600 mb-2">500+</div>
-              <div className="text-gray-600">Talented Professionals</div>
+              <div className="text-gray-600 dark:text-gray-300">Talented Professionals</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-red-600 mb-2">100+</div>
-              <div className="text-gray-600">Companies Served</div>
+              <div className="text-gray-600 dark:text-gray-300">Companies Served</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-red-600 mb-2">95%</div>
-              <div className="text-gray-600">Success Rate</div>
+              <div className="text-gray-600 dark:text-gray-300">Success Rate</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-red-600 mb-2">24/7</div>
-              <div className="text-gray-600">Support Available</div>
+              <div className="text-gray-600 dark:text-gray-300">Support Available</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section className="py-20">
+      <section className="py-20 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
                 Why Choose MarvelRecruit?
               </h2>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
                 We specialize in connecting top-tier African tech talent, particularly from Nigeria, 
                 with global opportunities. Our rigorous vetting process ensures you get access to 
                 exceptional professionals who are ready to make an impact.
@@ -80,19 +79,19 @@ const Index = () => {
               <div className="space-y-4">
                 <div className="flex items-center">
                   <CheckCircle className="h-6 w-6 text-green-500 mr-3" />
-                  <span className="text-gray-700">Thoroughly vetted candidates</span>
+                  <span className="text-gray-700 dark:text-gray-300">Thoroughly vetted candidates</span>
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-6 w-6 text-green-500 mr-3" />
-                  <span className="text-gray-700">Fast and efficient hiring process</span>
+                  <span className="text-gray-700 dark:text-gray-300">Fast and efficient hiring process</span>
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-6 w-6 text-green-500 mr-3" />
-                  <span className="text-gray-700">Ongoing support and consultation</span>
+                  <span className="text-gray-700 dark:text-gray-300">Ongoing support and consultation</span>
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-6 w-6 text-green-500 mr-3" />
-                  <span className="text-gray-700">Competitive rates with top quality</span>
+                  <span className="text-gray-700 dark:text-gray-300">Competitive rates with top quality</span>
                 </div>
               </div>
             </div>
@@ -100,29 +99,29 @@ const Index = () => {
               <Card className="card-hover">
                 <CardContent className="p-6 text-center">
                   <Users className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                  <h3 className="font-semibold mb-2">Expert Talent</h3>
-                  <p className="text-gray-600 text-sm">Access to skilled professionals across multiple tech domains</p>
+                  <h3 className="font-semibold mb-2 dark:text-white">Expert Talent</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">Access to skilled professionals across multiple tech domains</p>
                 </CardContent>
               </Card>
               <Card className="card-hover">
                 <CardContent className="p-6 text-center">
                   <Globe className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                  <h3 className="font-semibold mb-2">Global Reach</h3>
-                  <p className="text-gray-600 text-sm">Remote-first approach connecting talent worldwide</p>
+                  <h3 className="font-semibold mb-2 dark:text-white">Global Reach</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">Remote-first approach connecting talent worldwide</p>
                 </CardContent>
               </Card>
               <Card className="card-hover">
                 <CardContent className="p-6 text-center">
                   <Award className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                  <h3 className="font-semibold mb-2">Quality Assured</h3>
-                  <p className="text-gray-600 text-sm">Rigorous screening process ensures top-tier candidates</p>
+                  <h3 className="font-semibold mb-2 dark:text-white">Quality Assured</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">Rigorous screening process ensures top-tier candidates</p>
                 </CardContent>
               </Card>
               <Card className="card-hover">
                 <CardContent className="p-6 text-center">
                   <CheckCircle className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                  <h3 className="font-semibold mb-2">Proven Results</h3>
-                  <p className="text-gray-600 text-sm">Track record of successful placements and satisfied clients</p>
+                  <h3 className="font-semibold mb-2 dark:text-white">Proven Results</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">Track record of successful placements and satisfied clients</p>
                 </CardContent>
               </Card>
             </div>
@@ -131,24 +130,24 @@ const Index = () => {
       </section>
 
       {/* Industries Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Industries We Serve
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Our expertise spans across multiple tech industries, providing specialized talent for your specific needs
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Link to="/industries/gaming">
               <Card className="card-hover h-full">
                 <CardContent className="p-8 text-center h-full flex flex-col">
                   <div className="text-4xl mb-4">🎮</div>
-                  <h3 className="text-xl font-semibold mb-4">Gaming</h3>
-                  <p className="text-gray-600 mb-6 flex-grow">
+                  <h3 className="text-xl font-semibold mb-4 dark:text-white">Gaming</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">
                     Game developers, designers, artists, and producers who bring gaming experiences to life
                   </p>
                   <Button className="w-full bg-red-600 hover:bg-red-700">
@@ -162,8 +161,8 @@ const Index = () => {
               <Card className="card-hover h-full">
                 <CardContent className="p-8 text-center h-full flex flex-col">
                   <div className="text-4xl mb-4">💰</div>
-                  <h3 className="text-xl font-semibold mb-4">Fintech/Blockchain</h3>
-                  <p className="text-gray-600 mb-6 flex-grow">
+                  <h3 className="text-xl font-semibold mb-4 dark:text-white">Fintech/Blockchain</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">
                     Blockchain developers, cybersecurity analysts, and fintech specialists
                   </p>
                   <Button className="w-full bg-red-600 hover:bg-red-700">
@@ -177,8 +176,8 @@ const Index = () => {
               <Card className="card-hover h-full">
                 <CardContent className="p-8 text-center h-full flex flex-col">
                   <div className="text-4xl mb-4">💻</div>
-                  <h3 className="text-xl font-semibold mb-4">Software & Services</h3>
-                  <p className="text-gray-600 mb-6 flex-grow">
+                  <h3 className="text-xl font-semibold mb-4 dark:text-white">Software & Services</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">
                     Full-stack developers, DevOps engineers, and software architects
                   </p>
                   <Button className="w-full bg-red-600 hover:bg-red-700">
@@ -187,11 +186,50 @@ const Index = () => {
                 </CardContent>
               </Card>
             </Link>
+
+            <Card className="card-hover h-full opacity-75">
+              <CardContent className="p-8 text-center h-full flex flex-col">
+                <div className="text-4xl mb-4">🏥</div>
+                <h3 className="text-xl font-semibold mb-4 dark:text-white">Healthcare Tech</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">
+                  Health informatics specialists, telemedicine developers, and medical software engineers
+                </p>
+                <Button disabled className="w-full">
+                  Coming Soon
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="card-hover h-full opacity-75">
+              <CardContent className="p-8 text-center h-full flex flex-col">
+                <div className="text-4xl mb-4">🛒</div>
+                <h3 className="text-xl font-semibold mb-4 dark:text-white">E-commerce</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">
+                  E-commerce platform developers, marketplace specialists, and payment integration experts
+                </p>
+                <Button disabled className="w-full">
+                  Coming Soon
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="card-hover h-full opacity-75">
+              <CardContent className="p-8 text-center h-full flex flex-col">
+                <div className="text-4xl mb-4">🎓</div>
+                <h3 className="text-xl font-semibold mb-4 dark:text-white">EdTech</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">
+                  Educational platform developers, learning management system specialists, and instructional designers
+                </p>
+                <Button disabled className="w-full">
+                  Coming Soon
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Preview */}
+      {/* Testimonials Preview - COMMENTED OUT
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -274,6 +312,7 @@ const Index = () => {
           </div>
         </div>
       </section>
+      */}
 
       {/* CTA Section */}
       <section className="py-20 hero-gradient text-white">
