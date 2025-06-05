@@ -91,10 +91,6 @@ const Layout = ({ children }: LayoutProps) => {
               >
                 Blog
               </Link>
-
-              <Button className="bg-red-600 hover:bg-red-700 text-white">
-                Get Started
-              </Button>
             </nav>
 
             {/* Mobile menu button */}
@@ -165,10 +161,6 @@ const Layout = ({ children }: LayoutProps) => {
               >
                 Blog
               </Link>
-
-              <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
-                Get Started
-              </Button>
             </div>
           )}
         </div>
