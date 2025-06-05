@@ -1,4 +1,3 @@
-
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { FileText, Users, Briefcase, Star } from "lucide-react";
+import { FileText, Users, Briefcase, Star, Check } from "lucide-react";
 
 const JobSeekers = () => {
   const { toast } = useToast();
@@ -23,7 +22,8 @@ const JobSeekers = () => {
     portfolio: "",
     expectedSalary: "",
     availability: "",
-    bio: ""
+    bio: "",
+    plan: "free"
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -81,6 +81,79 @@ const JobSeekers = () => {
             </Card>
           </div>
 
+          {/* Registration Plan Section */}
+          <div className="mb-12">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Registration Plan</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                To get the most out of our candidate-first services, choose the plan that best suits your current needs.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {/* Free Plan */}
+              <Card className="relative">
+                <CardHeader className="text-center pb-4">
+                  <CardTitle className="text-2xl font-bold text-gray-900">Free</CardTitle>
+                  <p className="text-gray-600">Get started with essential features</p>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <div className="space-y-4">
+                    <div className="flex items-center">
+                      <Check className="h-5 w-5 text-green-500 mr-3" />
+                      <span className="text-gray-700">Free membership</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Check className="h-5 w-5 text-green-500 mr-3" />
+                      <span className="text-gray-700">Talent shortlist</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Check className="h-5 w-5 text-green-500 mr-3" />
+                      <span className="text-gray-700">Learning articles</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Premium Plan */}
+              <Card className="relative border-red-200 border-2">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    Popular
+                  </span>
+                </div>
+                <CardHeader className="text-center pb-4">
+                  <CardTitle className="text-2xl font-bold text-gray-900">Premium</CardTitle>
+                  <p className="text-gray-600">Everything in Free plus exclusive features</p>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <div className="space-y-4">
+                    <div className="flex items-center">
+                      <Check className="h-5 w-5 text-green-500 mr-3" />
+                      <span className="text-gray-700">Free membership</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Check className="h-5 w-5 text-green-500 mr-3" />
+                      <span className="text-gray-700">Talent shortlist</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Check className="h-5 w-5 text-green-500 mr-3" />
+                      <span className="text-gray-700">Learning articles</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Check className="h-5 w-5 text-red-600 mr-3" />
+                      <span className="text-gray-700 font-medium">Consultancy meetings</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Check className="h-5 w-5 text-red-600 mr-3" />
+                      <span className="text-gray-700 font-medium">Resume review</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
           {/* Registration Form */}
           <Card>
             <CardHeader>
@@ -91,6 +164,25 @@ const JobSeekers = () => {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Plan Selection */}
+                <div>
+                  <Label>Choose Your Plan</Label>
+                  <RadioGroup 
+                    value={formData.plan}
+                    onValueChange={(value) => handleInputChange("plan", value)}
+                    className="flex flex-col space-y-2 mt-2"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="free" id="free-plan" />
+                      <Label htmlFor="free-plan">Free Plan</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="premium" id="premium-plan" />
+                      <Label htmlFor="premium-plan">Premium Plan</Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <Label htmlFor="fullName">Full Name *</Label>
