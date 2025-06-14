@@ -1,3 +1,4 @@
+
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -77,10 +78,10 @@ const HireNigerianExperts = () => {
                 and tech professionals. Build your global team with Nigeria's finest talent.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-red-600 hover:bg-gray-100 dark:bg-red-600 dark:text-white dark:hover:bg-red-700 transition-colors">
+                <Button size="lg" variant="secondary" className="transition-colors">
                   Start Hiring Today
                 </Button>
-                <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-red-600 dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-red-600 transition-colors">
+                <Button size="lg" variant="outline" className="transition-colors">
                   View Talent Pool
                 </Button>
               </div>
@@ -230,10 +231,10 @@ const HireNigerianExperts = () => {
               Join hundreds of companies that have successfully hired Nigerian tech talent
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-red-600 hover:bg-gray-100 dark:bg-red-600 dark:text-white dark:hover:bg-red-700 transition-colors">
+              <Button size="lg" variant="secondary" className="transition-colors">
                 Get Started Today
               </Button>
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-red-600 dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-red-600 transition-colors">
+              <Button size="lg" variant="outline" className="transition-colors">
                 Schedule a Call
               </Button>
             </div>
