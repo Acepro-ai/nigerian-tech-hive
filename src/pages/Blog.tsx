@@ -38,11 +38,11 @@ const Blog = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gray-50 py-20">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <Link to="/">
-              <Button variant="outline" className="mb-6">
+              <Button variant="outline" className="mb-6 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-800">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Button>
@@ -50,10 +50,10 @@ const Blog = () => {
           </div>
           
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Tech Career & Industry Insights
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Stay updated with the latest trends, career advice, and opportunities 
               in the global tech industry for Nigerian professionals.
             </p>
@@ -61,20 +61,20 @@ const Blog = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {blogPosts.map((post) => (
-              <Card key={post.id} className="card-hover">
+              <Card key={post.id} className="card-hover bg-white dark:bg-gray-800">
                 <CardHeader>
                   <div className="text-sm text-red-600 font-medium mb-2">
                     {post.category}
                   </div>
-                  <CardTitle className="text-xl mb-3">
+                  <CardTitle className="text-xl mb-3 text-gray-900 dark:text-white">
                     {post.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
                     {post.excerpt}
                   </p>
-                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                  <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
                     <div className="flex items-center">
                       <User className="h-4 w-4 mr-1" />
                       {post.author}
@@ -84,11 +84,11 @@ const Blog = () => {
                       {post.readTime}
                     </div>
                   </div>
-                  <div className="flex items-center text-sm text-gray-500 mb-4">
+                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
                     <Calendar className="h-4 w-4 mr-1" />
                     {post.date}
                   </div>
-                  <Button className="w-full bg-red-600 hover:bg-red-700">
+                  <Button className="w-full bg-red-600 hover:bg-red-700 text-white dark:bg-red-600 dark:hover:bg-red-700 dark:text-white">
                     Read More
                   </Button>
                 </CardContent>
@@ -96,17 +96,17 @@ const Blog = () => {
             ))}
           </div>
 
-          <Card className="max-w-3xl mx-auto text-center">
+          <Card className="max-w-3xl mx-auto text-center bg-white dark:bg-gray-800">
             <CardContent className="p-12">
               <div className="text-5xl mb-6">📝</div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 More Content Coming Soon!
               </h2>
-              <p className="text-lg text-gray-600 mb-6">
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
                 We're working on bringing you more valuable insights, career guides, 
                 and industry analysis. Subscribe to our newsletter to stay updated.
               </p>
-              <Button className="bg-red-600 hover:bg-red-700 text-white">
+              <Button className="bg-red-600 hover:bg-red-700 text-white dark:bg-red-600 dark:hover:bg-red-700 dark:text-white">
                 Subscribe to Newsletter
               </Button>
             </CardContent>
@@ -118,3 +118,4 @@ const Blog = () => {
 };
 
 export default Blog;
+
