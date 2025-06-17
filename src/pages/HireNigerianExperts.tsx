@@ -78,12 +78,16 @@ const HireNigerianExperts = () => {
                 and tech professionals. Build your global team with Nigeria's finest talent.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="secondary" className="transition-colors">
-                  Start Hiring Today
-                </Button>
-                <Button size="lg" variant="outline" className="transition-colors">
-                  View Talent Pool
-                </Button>
+                <Link to="/candidates">
+                  <Button size="lg" variant="secondary" className="transition-colors">
+                    Start Hiring Today
+                  </Button>
+                </Link>
+                <Link to="/candidates">
+                  <Button size="lg" variant="outline" className="transition-colors">
+                    View Talent Pool
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -231,9 +235,11 @@ const HireNigerianExperts = () => {
               Join hundreds of companies that have successfully hired Nigerian tech talent
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="transition-colors">
-                Get Started Today
-              </Button>
+              <Link to="/candidates">
+                <Button size="lg" variant="secondary" className="transition-colors">
+                  Get Started Today
+                </Button>
+              </Link>
               <Button size="lg" variant="outline" className="transition-colors">
                 Schedule a Call
               </Button>
