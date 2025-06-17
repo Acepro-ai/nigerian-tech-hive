@@ -79,12 +79,12 @@ const Software = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         {/* Header */}
-        <div className="hero-gradient text-white py-20">
+        <div className="hero-gradient text-white py-20 dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link to="/">
-              <Button variant="outline" className="mb-6 text-white border-white hover:bg-white hover:text-red-600">
+              <Button variant="outline" className="mb-6 text-white border-white hover:bg-white hover:text-red-600 dark:border-white/20 dark:hover:bg-white/10">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Button>
@@ -106,10 +106,10 @@ const Software = () => {
         <div className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                 Key Service Areas
               </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 Software and services companies operate across diverse domains, 
                 creating opportunities for specialists and generalists alike.
               </p>
@@ -117,11 +117,11 @@ const Software = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
               {serviceAreas.map((area, index) => (
-                <Card key={index} className="text-center card-hover">
+                <Card key={index} className="text-center card-hover dark:bg-gray-800 dark:border-gray-700">
                   <CardContent className="p-6">
                     <area.icon className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold mb-3">{area.title}</h3>
-                    <p className="text-gray-600 text-sm">{area.description}</p>
+                    <h3 className="text-lg font-semibold mb-3 dark:text-white">{area.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">{area.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -130,41 +130,41 @@ const Software = () => {
         </div>
 
         {/* Available Roles */}
-        <div className="bg-white py-16">
+        <div className="bg-white dark:bg-gray-800 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                 In-Demand Roles
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-gray-600 dark:text-gray-300">
                 Explore opportunities across the software and services landscape
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {roles.map((role, index) => (
-                <Card key={index} className="card-hover">
+                <Card key={index} className="card-hover dark:bg-gray-700 dark:border-gray-600">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
                       {role.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 text-sm">
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm">
                       {role.description}
                     </p>
                     <div className="mb-4">
-                      <h4 className="font-medium text-gray-900 mb-2 text-sm">Key Skills:</h4>
+                      <h4 className="font-medium text-gray-900 dark:text-white mb-2 text-sm">Key Skills:</h4>
                       <div className="flex flex-wrap gap-1">
                         {role.skills.map((skill, skillIndex) => (
                           <span
                             key={skillIndex}
-                            className="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs"
+                            className="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-xs"
                           >
                             {skill}
                           </span>
                         ))}
                       </div>
                     </div>
-                    <div className="text-green-600 font-semibold text-sm">
+                    <div className="text-green-600 dark:text-green-400 font-semibold text-sm">
                       {role.salaryRange}
                     </div>
                   </CardContent>
@@ -175,14 +175,14 @@ const Software = () => {
         </div>
 
         {/* Company Types */}
-        <div className="bg-gray-50 py-16">
+        <div className="bg-gray-50 dark:bg-gray-900 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
                   Where You'll Work
                 </h2>
-                <p className="text-lg text-gray-600 mb-8">
+                <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
                   Software and services companies span every industry, from startups 
                   building the next big platform to established enterprises serving 
                   millions of users worldwide.
@@ -192,20 +192,20 @@ const Software = () => {
                   {companyTypes.map((type, index) => (
                     <div key={index} className="flex items-center">
                       <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                      <span className="text-gray-700">{type}</span>
+                      <span className="text-gray-700 dark:text-gray-300">{type}</span>
                     </div>
                   ))}
                 </div>
               </div>
               
               <div className="space-y-6">
-                <Card className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">Career Growth</h3>
-                  <p className="text-gray-600 mb-4">
+                <Card className="p-6 dark:bg-gray-800 dark:border-gray-700">
+                  <h3 className="text-xl font-semibold mb-4 dark:text-white">Career Growth</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
                     Software and services companies offer clear career progression paths, 
                     from junior developer to technical lead, architect, or management roles.
                   </p>
-                  <ul className="space-y-2 text-sm text-gray-600">
+                  <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                     <li>• Technical leadership opportunities</li>
                     <li>• Cross-functional collaboration</li>
                     <li>• Continuous learning culture</li>
@@ -213,9 +213,9 @@ const Software = () => {
                   </ul>
                 </Card>
                 
-                <Card className="p-6 text-center">
+                <Card className="p-6 text-center dark:bg-gray-800 dark:border-gray-700">
                   <Users className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-4">Ready to Apply?</h3>
+                  <h3 className="text-xl font-semibold mb-4 dark:text-white">Ready to Apply?</h3>
                   <Link to="/job-seekers">
                     <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
                       Join Our Network

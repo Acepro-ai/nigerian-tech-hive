@@ -44,12 +44,12 @@ const Fintech = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         {/* Header */}
-        <div className="hero-gradient text-white py-20">
+        <div className="hero-gradient text-white py-20 dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link to="/">
-              <Button variant="outline" className="mb-6 text-white border-white hover:bg-white hover:text-red-600">
+              <Button variant="outline" className="mb-6 text-white border-white hover:bg-white hover:text-red-600 dark:border-white/20 dark:hover:bg-white/10">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Button>
@@ -72,41 +72,41 @@ const Fintech = () => {
         <div className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                 Why Fintech?
               </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 The fintech industry is experiencing explosive growth, with companies seeking 
                 talented developers to build the financial infrastructure of tomorrow.
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 mb-16">
-              <Card className="text-center card-hover">
+              <Card className="text-center card-hover dark:bg-gray-800 dark:border-gray-700">
                 <CardContent className="p-8">
                   <TrendingUp className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-3">Rapid Growth</h3>
-                  <p className="text-gray-600">
+                  <h3 className="text-xl font-semibold mb-3 dark:text-white">Rapid Growth</h3>
+                  <p className="text-gray-600 dark:text-gray-300">
                     Fintech investment reached $91.5B globally in 2021, with continued expansion expected
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="text-center card-hover">
+              <Card className="text-center card-hover dark:bg-gray-800 dark:border-gray-700">
                 <CardContent className="p-8">
                   <Shield className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-3">Security Focus</h3>
-                  <p className="text-gray-600">
+                  <h3 className="text-xl font-semibold mb-3 dark:text-white">Security Focus</h3>
+                  <p className="text-gray-600 dark:text-gray-300">
                     High demand for developers who understand financial security and compliance
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="text-center card-hover">
+              <Card className="text-center card-hover dark:bg-gray-800 dark:border-gray-700">
                 <CardContent className="p-8">
                   <DollarSign className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-3">Competitive Pay</h3>
-                  <p className="text-gray-600">
+                  <h3 className="text-xl font-semibold mb-3 dark:text-white">Competitive Pay</h3>
+                  <p className="text-gray-600 dark:text-gray-300">
                     Above-average salaries with equity opportunities in high-growth companies
                   </p>
                 </CardContent>
@@ -116,41 +116,41 @@ const Fintech = () => {
         </div>
 
         {/* Available Roles */}
-        <div className="bg-white py-16">
+        <div className="bg-white dark:bg-gray-800 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                 Popular Fintech Roles
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-gray-600 dark:text-gray-300">
                 Explore high-demand positions in the fintech sector
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
               {roles.map((role, index) => (
-                <Card key={index} className="card-hover">
+                <Card key={index} className="card-hover dark:bg-gray-700 dark:border-gray-600">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
                       {role.title}
                     </h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
                       {role.description}
                     </p>
                     <div className="mb-4">
-                      <h4 className="font-medium text-gray-900 mb-2">Key Skills:</h4>
+                      <h4 className="font-medium text-gray-900 dark:text-white mb-2">Key Skills:</h4>
                       <div className="flex flex-wrap gap-2">
                         {role.skills.map((skill, skillIndex) => (
                           <span
                             key={skillIndex}
-                            className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm"
+                            className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-sm"
                           >
                             {skill}
                           </span>
                         ))}
                       </div>
                     </div>
-                    <div className="text-green-600 font-semibold">
+                    <div className="text-green-600 dark:text-green-400 font-semibold">
                       {role.salaryRange}
                     </div>
                   </CardContent>
@@ -161,14 +161,14 @@ const Fintech = () => {
         </div>
 
         {/* Benefits Section */}
-        <div className="bg-gray-50 py-16">
+        <div className="bg-gray-50 dark:bg-gray-900 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
                   Fintech Benefits & Perks
                 </h2>
-                <p className="text-lg text-gray-600 mb-8">
+                <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
                   Fintech companies offer some of the best benefits in the tech industry, 
                   recognizing the importance of attracting and retaining top talent.
                 </p>
@@ -177,18 +177,18 @@ const Fintech = () => {
                   {benefits.map((benefit, index) => (
                     <div key={index} className="flex items-center">
                       <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                      <span className="text-gray-700">{benefit}</span>
+                      <span className="text-gray-700 dark:text-gray-300">{benefit}</span>
                     </div>
                   ))}
                 </div>
               </div>
               
               <div className="relative">
-                <Card className="p-8">
+                <Card className="p-8 dark:bg-gray-800 dark:border-gray-700">
                   <div className="text-center">
                     <Users className="h-16 w-16 text-red-600 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold mb-4">Ready to Start?</h3>
-                    <p className="text-gray-600 mb-6">
+                    <h3 className="text-xl font-semibold mb-4 dark:text-white">Ready to Start?</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6">
                       Join thousands of Nigerian developers already working in fintech
                     </p>
                     <Link to="/job-seekers">
