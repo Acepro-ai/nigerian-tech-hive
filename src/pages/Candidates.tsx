@@ -1,12 +1,12 @@
 
 import Layout from "@/components/Layout";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { MapPin, Mail, Phone, Globe, Star, Calendar } from "lucide-react";
+import CandidatesHeader from "@/components/candidates/CandidatesHeader";
+import CandidatesFilters from "@/components/candidates/CandidatesFilters";
+import CandidatesGrid from "@/components/candidates/CandidatesGrid";
+import { Candidate } from "@/components/candidates/CandidateCard";
 
 const Candidates = () => {
-  const candidates = [
+  const candidates: Candidate[] = [
     {
       id: 1,
       name: "Adebayo Ogundimu",
@@ -102,129 +102,9 @@ const Candidates = () => {
   return (
     <Layout>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        {/* Header */}
-        <div className="hero-gradient text-white py-16 dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-4xl font-bold mb-4">Available Nigerian Tech Experts</h1>
-              <p className="text-xl text-white/90 dark:text-white/80 max-w-3xl mx-auto">
-                Browse profiles of verified Nigerian tech professionals ready to join your team
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Filters */}
-        <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 py-4">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap gap-4">
-              <Button variant="outline" size="sm">All Specialties</Button>
-              <Button variant="outline" size="sm">Frontend</Button>
-              <Button variant="outline" size="sm">Backend</Button>
-              <Button variant="outline" size="sm">Mobile</Button>
-              <Button variant="outline" size="sm">DevOps</Button>
-              <Button variant="outline" size="sm">Data Science</Button>
-              <Button variant="outline" size="sm">Blockchain</Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Candidates Grid */}
-        <div className="py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {candidates.map((candidate) => (
-                <Card key={candidate.id} className="card-hover bg-white dark:bg-gray-800">
-                  <CardHeader className="text-center">
-                    <div className="w-24 h-24 mx-auto mb-4">
-                      <img
-                        src={candidate.avatar}
-                        alt={candidate.name}
-                        className="w-full h-full rounded-full object-cover"
-                      />
-                    </div>
-                    <CardTitle className="text-xl text-gray-900 dark:text-white">
-                      {candidate.name}
-                    </CardTitle>
-                    <p className="text-red-600 dark:text-red-400 font-medium">
-                      {candidate.title}
-                    </p>
-                    <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <MapPin className="h-4 w-4" />
-                      {candidate.location}
-                    </div>
-                  </CardHeader>
-                  
-                  <CardContent className="space-y-4">
-                    {/* Rating and Experience */}
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                        <span className="font-medium text-gray-900 dark:text-white">
-                          {candidate.rating}
-                        </span>
-                      </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-300">
-                        {candidate.experience}
-                      </div>
-                    </div>
-
-                    {/* Hourly Rate */}
-                    <div className="text-center">
-                      <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                        {candidate.hourlyRate}
-                      </span>
-                      <span className="text-gray-600 dark:text-gray-300">/hour</span>
-                    </div>
-
-                    {/* Skills */}
-                    <div>
-                      <p className="text-sm font-medium text-gray-900 dark:text-white mb-2">Skills:</p>
-                      <div className="flex flex-wrap gap-1">
-                        {candidate.skills.map((skill, index) => (
-                          <Badge key={index} variant="secondary" className="text-xs">
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Bio */}
-                    <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-3">
-                      {candidate.bio}
-                    </p>
-
-                    {/* Availability */}
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4 text-green-600" />
-                      <span className="text-sm text-green-600 font-medium">
-                        {candidate.availability}
-                      </span>
-                    </div>
-
-                    {/* Contact Buttons */}
-                    <div className="flex gap-2">
-                      <Button size="sm" className="flex-1">
-                        <Mail className="h-4 w-4 mr-1" />
-                        Contact
-                      </Button>
-                      <Button size="sm" variant="outline" className="flex-1">
-                        View Profile
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Load More */}
-        <div className="text-center pb-16">
-          <Button variant="outline" size="lg">
-            Load More Candidates
-          </Button>
-        </div>
+        <CandidatesHeader />
+        <CandidatesFilters />
+        <CandidatesGrid candidates={candidates} />
       </div>
     </Layout>
   );
