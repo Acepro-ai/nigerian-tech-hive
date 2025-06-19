@@ -31,7 +31,7 @@ const CandidateCard = ({ candidate }: CandidateCardProps) => {
         <div className="w-24 h-24 mx-auto mb-4">
           <img
             src={candidate.avatar}
-            alt={candidate.first_name}
+            alt={candidate.fullName}
             className="w-full h-full rounded-full object-cover"
           />
         </div>
