@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,7 +13,13 @@ import Fintech from "./pages/industries/Fintech";
 import Software from "./pages/industries/Software";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -25,7 +30,10 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/job-seekers" element={<JobSeekers />} />
-          <Route path="/hire-nigerian-experts" element={<HireNigerianExperts />} />
+          <Route
+            path="/hire-nigerian-experts"
+            element={<HireNigerianExperts />}
+          />
           <Route path="/candidates" element={<Candidates />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/industries/gaming" element={<Gaming />} />

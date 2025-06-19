@@ -186,7 +186,7 @@ const Index = () => {
               </Card>
             </Link>
 
-            <Card className="card-hover h-full opacity-75">
+            {/* <Card className="card-hover h-full opacity-75">
               <CardContent className="p-8 text-center h-full flex flex-col">
                 <div className="text-4xl mb-4">🏥</div>
                 <h3 className="text-xl font-semibold mb-4 dark:text-white">Healthcare Tech</h3>
@@ -223,7 +223,7 @@ const Index = () => {
                   Coming Soon
                 </Button>
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
         </div>
       </section>

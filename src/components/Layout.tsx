@@ -229,9 +229,9 @@ const Layout = ({ children }: LayoutProps) => {
                 <li><Link to="/industries/gaming" className="hover:text-white transition-colors">Gaming</Link></li>
                 <li><Link to="/industries/fintech" className="hover:text-white transition-colors">Fintech</Link></li>
                 <li><Link to="/industries/software" className="hover:text-white transition-colors">Software and Services</Link></li>
-                <li><span className="text-gray-500">Healthcare (Coming Soon)</span></li>
+                {/* <li><span className="text-gray-500">Healthcare (Coming Soon)</span></li>
                 <li><span className="text-gray-500">E-commerce (Coming Soon)</span></li>
-                <li><span className="text-gray-500">EdTech (Coming Soon)</span></li>
+                <li><span className="text-gray-500">EdTech (Coming Soon)</span></li> */}
               </ul>
             </div>
             

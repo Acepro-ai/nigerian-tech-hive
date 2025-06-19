@@ -6,7 +6,7 @@ import { MapPin, Mail, Star, Calendar } from "lucide-react";
 
 interface Candidate {
   id: number;
-  name: string;
+  fullName: string;
   title: string;
   location: string;
   avatar: string;
@@ -31,12 +31,12 @@ const CandidateCard = ({ candidate }: CandidateCardProps) => {
         <div className="w-24 h-24 mx-auto mb-4">
           <img
             src={candidate.avatar}
-            alt={candidate.name}
+            alt={candidate.first_name}
             className="w-full h-full rounded-full object-cover"
           />
         </div>
         <CardTitle className="text-xl text-gray-900 dark:text-white">
-          {candidate.name}
+          {candidate.fullName}
         </CardTitle>
         <p className="text-red-600 dark:text-red-400 font-medium">
           {candidate.title}
