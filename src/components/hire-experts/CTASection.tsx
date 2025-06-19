@@ -18,9 +18,11 @@ const CTASection = () => {
               Get Started Today
             </Button>
           </Link>
-          <Button size="lg" variant="outline" className="transition-colors">
-            Schedule a Call
-          </Button>
+          <a href="https://calendly.com/zongsevenonline/meeting-with-marvelous-2?month=2025-06" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" variant="outline" className="transition-colors">
+              Schedule a Call
+            </Button>
+          </a>
         </div>
       </div>
     </div>

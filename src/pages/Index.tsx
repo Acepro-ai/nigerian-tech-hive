@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Layout from "@/components/Layout";
@@ -229,91 +228,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials Preview - COMMENTED OUT
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              What Our Clients Say
-            </h2>
-            <p className="text-lg text-gray-600">
-              Don't just take our word for it - hear from satisfied clients
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="card-hover">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-6">
-                  "MarvelRecruit helped us find exceptional Nigerian developers who seamlessly integrated into our team. The quality of talent is outstanding."
-                </p>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                  <div>
-                    <div className="font-semibold">Sarah Johnson</div>
-                    <div className="text-gray-500 text-sm">CTO, TechCorp</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="card-hover">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-6">
-                  "The recruitment process was smooth and efficient. We found the perfect blockchain developer for our project within weeks."
-                </p>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                  <div>
-                    <div className="font-semibold">Michael Chen</div>
-                    <div className="text-gray-500 text-sm">Founder, CryptoStart</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="card-hover">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-6">
-                  "Outstanding service! The talent they provided exceeded our expectations and delivered exceptional results for our gaming project."
-                </p>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                  <div>
-                    <div className="font-semibold">Emily Rodriguez</div>
-                    <div className="text-gray-500 text-sm">Lead Producer, GameStudio</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="text-center mt-12">
-            <Link to="/testimonials">
-              <Button variant="outline" className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white">
-                View All Testimonials
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-      */}
-
       {/* CTA Section */}
       <section className="py-20 hero-gradient text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -344,9 +258,11 @@ const Index = () => {
               <p className="text-red-100 text-sm">Discuss what we can do for you and how we can make the hiring process easy and seamless.</p>
             </div>
           </div>
-          <Button size="lg" className="bg-white text-red-600 hover:bg-gray-100 text-lg px-8">
-            Book a Free Consulting Call
-          </Button>
+          <a href="https://calendly.com/zongsevenonline/meeting-with-marvelous-2?month=2025-06" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="bg-white text-red-600 hover:bg-gray-100 text-lg px-8">
+              Book a Free Consulting Call
+            </Button>
+          </a>
         </div>
       </section>
     </Layout>

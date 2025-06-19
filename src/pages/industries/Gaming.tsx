@@ -189,9 +189,11 @@ const Gaming = () => {
               <p className="text-red-100 text-sm">Discuss what we can do for you and how we can make the hiring process easy and seamless.</p>
             </div>
           </div>
-          <Button size="lg" className="bg-white text-red-600 hover:bg-gray-100 text-lg px-8">
-            Book a Free Consulting Call
-          </Button>
+          <a href="https://calendly.com/zongsevenonline/meeting-with-marvelous-2?month=2025-06" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="bg-white text-red-600 hover:bg-gray-100 text-lg px-8">
+              Book a Free Consulting Call
+            </Button>
+          </a>
         </div>
       </section>
     </Layout>
