@@ -20,6 +20,7 @@ interface Candidate {
   availability: string;
   email: string;
   phone: string;
+  portfolio: string;
 }
 
 interface CandidateCardProps {
@@ -35,6 +36,10 @@ const CandidateCard = ({ candidate }: CandidateCardProps) => {
 
   const handleCloseProfile = () => {
     setIsProfileOpen(false);
+  };
+
+  const handleContactClick = () => {
+    window.location.href = `mailto:${candidate.email}`;
   };
 
   return (
@@ -63,16 +68,9 @@ const CandidateCard = ({ candidate }: CandidateCardProps) => {
         <CardContent className="space-y-4">
           {/* Rating and Experience */}
           <div className="flex justify-center items-center">
-            {/* <div className="flex items-center gap-1">
-              <Star className="h-4 w-4 text-yellow-500 fill-current" />
-              <span className="font-medium text-gray-900 dark:text-white">
-                {candidate.rating}
-              </span>
-            </div> */}
-
             {/* Contact Buttons */}
             <div className="flex gap-2">
-              <Button size="sm" className="flex-1">
+              <Button size="sm" className="flex-1" onClick={handleContactClick}>
                 <Mail className="h-4 w-4 mr-1" />
                 Contact
               </Button>

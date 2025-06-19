@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Mail, Phone, Star, Calendar, User } from "lucide-react";
+import { MapPin, Mail, Phone, Star, Calendar, User, FileText } from "lucide-react";
 import { Candidate } from "./CandidateCard";
 
 interface CandidateProfileProps {
@@ -18,6 +18,10 @@ interface CandidateProfileProps {
 
 const CandidateProfile = ({ candidate, isOpen, onClose }: CandidateProfileProps) => {
   if (!candidate) return null;
+
+  const handleContactClick = () => {
+    window.location.href = `mailto:${candidate.email}`;
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -52,21 +56,10 @@ const CandidateProfile = ({ candidate, isOpen, onClose }: CandidateProfileProps)
 
           {/* Key Stats */}
           <div className="grid justify-center gap-4 text-center">
-            {/* <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <div className="flex items-center justify-center gap-1 mb-1">
-                <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                <span className="font-bold text-lg">{candidate.rating}</span>
-              </div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">Rating</p>
-            </div> */}
             <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
               <div className="font-bold text-lg mb-1">{candidate.experience}</div>
               <p className="text-sm text-gray-600 dark:text-gray-300">Experience</p>
             </div>
-            {/* <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <div className="font-bold text-lg mb-1">{candidate.hourlyRate}</div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">Per Hour</p>
-            </div> */}
           </div>
 
           {/* About Section */}
@@ -93,18 +86,27 @@ const CandidateProfile = ({ candidate, isOpen, onClose }: CandidateProfileProps)
             </div>
           </div>
 
-          {/* Availability */}
-          {/* <div>
-            <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
-              Availability
-            </h3>
-            <div className="flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-green-600" />
-              <span className="text-green-600 font-medium">
-                {candidate.availability}
-              </span>
+          {/* CV/Portfolio Section */}
+          {candidate.portfolio && (
+            <div>
+              <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
+                CV & Portfolio
+              </h3>
+              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                <div className="flex items-center gap-3">
+                  <FileText className="h-5 w-5 text-blue-600" />
+                  <a 
+                    href={candidate.portfolio} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 underline"
+                  >
+                    View CV/Portfolio
+                  </a>
+                </div>
+              </div>
             </div>
-          </div> */}
+          )}
 
           {/* Contact Information */}
           <div>
@@ -128,14 +130,10 @@ const CandidateProfile = ({ candidate, isOpen, onClose }: CandidateProfileProps)
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-3 pt-4 border-t">
-            <Button className="flex-1">
+          <div className="flex justify-center pt-4 border-t">
+            <Button className="px-8" onClick={handleContactClick}>
               <Mail className="h-4 w-4 mr-2" />
               Send Message
-            </Button>
-            <Button variant="outline" className="flex-1">
-              <User className="h-4 w-4 mr-2" />
-              Save Profile
             </Button>
           </div>
         </div>
