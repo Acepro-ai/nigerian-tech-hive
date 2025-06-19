@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Mail, Phone, Star, Calendar, User, FileText } from "lucide-react";
+import { MapPin, Mail, Phone, Star, Calendar, User, FileText, ExternalLink } from "lucide-react";
 import { Candidate } from "./CandidateCard";
 
 interface CandidateProfileProps {
@@ -21,6 +21,12 @@ const CandidateProfile = ({ candidate, isOpen, onClose }: CandidateProfileProps)
 
   const handleContactClick = () => {
     window.location.href = `mailto:${candidate.email}`;
+  };
+
+  const handleViewCV = () => {
+    if (candidate.cv) {
+      window.open(candidate.cv, '_blank');
+    }
   };
 
   return (
@@ -86,27 +92,65 @@ const CandidateProfile = ({ candidate, isOpen, onClose }: CandidateProfileProps)
             </div>
           </div>
 
-          {/* CV/Portfolio Section */}
-          {candidate.portfolio && (
-            <div>
-              <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
-                CV & Portfolio
-              </h3>
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <div className="flex items-center gap-3">
-                  <FileText className="h-5 w-5 text-blue-600" />
-                  <a 
-                    href={candidate.portfolio} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-800 underline"
-                  >
-                    View CV/Portfolio
-                  </a>
+          {/* CV & Portfolio Section */}
+          <div>
+            <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
+              Documents & Portfolio
+            </h3>
+            <div className="space-y-3">
+              {/* CV Section */}
+              {candidate.cv && (
+                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <FileText className="h-5 w-5 text-red-600" />
+                      <span className="font-medium text-gray-900 dark:text-white">
+                        CV/Resume
+                      </span>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={handleViewCV}
+                      className="flex items-center gap-2"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      View CV
+                    </Button>
+                  </div>
                 </div>
-              </div>
+              )}
+              
+              {/* Portfolio Section */}
+              {candidate.portfolio && (
+                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <FileText className="h-5 w-5 text-blue-600" />
+                      <span className="font-medium text-gray-900 dark:text-white">
+                        Portfolio
+                      </span>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      asChild
+                    >
+                      <a 
+                        href={candidate.portfolio} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                        View Portfolio
+                      </a>
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
+          </div>
 
           {/* Contact Information */}
           <div>

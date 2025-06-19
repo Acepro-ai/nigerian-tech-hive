@@ -1,3 +1,4 @@
+
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -14,7 +15,7 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { FileText, Users, Briefcase, Star, Check } from "lucide-react";
+import { FileText, Users, Briefcase, Star, Check, Upload } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createUser } from "./../libs/users";
@@ -32,6 +33,7 @@ type JobSeekerFormData = {
   expectedSalary: string;
   bio: string;
   avatar: FileList;
+  cv: FileList;
 };
 
 const JobSeekers = () => {
@@ -70,34 +72,8 @@ const JobSeekers = () => {
   });
 
   const onSubmit = (data) => {
-    mutate({ ...data, avatar: data.avatar[0] });
+    mutate({ ...data, avatar: data.avatar[0], cv: data.cv[0] });
   };
-  // const [formData, setFormData] = useState({
-  //   fullName: "",
-  //   email: "",
-  //   phone: "",
-  //   location: "",
-  //   experience: "",
-  //   skills: "",
-  //   portfolio: "",
-  //   expectedSalary: "",
-  //   availability: "",
-  //   bio: "",
-  //   plan: "free"
-  // });
-
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   toast({
-  //     title: "Application Submitted!",
-  //     description: "We'll review your profile and get back to you soon.",
-  //   });
-  //   console.log("Form submitted:", formData);
-  // };
-
-  // const handleInputChange = (field: string, value: string) => {
-  //   setFormData(prev => ({ ...prev, [field]: value }));
-  // };
 
   return (
     <Layout>
@@ -430,29 +406,60 @@ const JobSeekers = () => {
                   <Textarea id="bio" rows={4} {...register("bio")} />
                 </div>
 
-                {/* Avatar Upload */}
-                <div>
-                  <Label htmlFor="avatar" className="dark:text-white">
-                    Upload Profile Picture
-                  </Label>
-                  <Input
-                    type="file"
-                    id="avatar"
-                    {...register("avatar", {
-                      required: "Profile picture is required",
-                    })}
-                  />
-                  {errors.avatar && (
-                    <p className="text-red-500 text-sm">
-                      {errors.avatar.message}
+                {/* File Upload Section */}
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Avatar Upload */}
+                  <div className="space-y-2">
+                    <Label htmlFor="avatar" className="dark:text-white flex items-center gap-2">
+                      <Upload className="h-4 w-4" />
+                      Upload Profile Picture
+                    </Label>
+                    <Input
+                      type="file"
+                      id="avatar"
+                      accept="image/*"
+                      className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-600 hover:file:bg-red-100"
+                      {...register("avatar", {
+                        required: "Profile picture is required",
+                      })}
+                    />
+                    {errors.avatar && (
+                      <p className="text-red-500 text-sm">
+                        {errors.avatar.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* CV Upload */}
+                  <div className="space-y-2">
+                    <Label htmlFor="cv" className="dark:text-white flex items-center gap-2">
+                      <FileText className="h-4 w-4" />
+                      Upload CV/Resume
+                    </Label>
+                    <Input
+                      type="file"
+                      id="cv"
+                      accept=".pdf,.doc,.docx"
+                      className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100"
+                      {...register("cv", {
+                        required: "CV/Resume is required",
+                      })}
+                    />
+                    {errors.cv && (
+                      <p className="text-red-500 text-sm">
+                        {errors.cv.message}
+                      </p>
+                    )}
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Accepted formats: PDF, DOC, DOCX (Max size: 5MB)
                     </p>
-                  )}
+                  </div>
                 </div>
 
                 {/* Submit Button */}
                 <div className="text-right">
-                  <Button type="submit" disabled={isPending}>
-                    {isPending ? "Submitting..." : "Submit"}
+                  <Button type="submit" disabled={isPending} className="px-8 py-3 text-lg">
+                    {isPending ? "Submitting..." : "Submit Application"}
                   </Button>
                 </div>
               </form>

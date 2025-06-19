@@ -1,3 +1,4 @@
+
 import supabase from "./supabase";
 
 export default async function getUsers() {
@@ -13,15 +14,18 @@ export default async function getUsers() {
 
 export async function createUser(newUser) {
   console.log(newUser);
-  const imageName = `${Math.random()}-${newUser.avatar.name}`.replaceAll(
-    "/",
-    ""
-  );
-  const imagePath = `https://piyurbuxydjkoyiskdzy.supabase.co/storage/v1/object/public/user-image//${imageName}`;
+  
+  // Generate unique names for avatar and CV files
+  const avatarName = `${Math.random()}-${newUser.avatar.name}`.replaceAll("/", "");
+  const avatarPath = `https://piyurbuxydjkoyiskdzy.supabase.co/storage/v1/object/public/user-image//${avatarName}`;
+  
+  const cvName = `${Math.random()}-${newUser.cv.name}`.replaceAll("/", "");
+  const cvPath = `https://piyurbuxydjkoyiskdzy.supabase.co/storage/v1/object/public/cv-documents//${cvName}`;
 
+  // Insert user data with both avatar and CV paths
   const { error: insertError } = await supabase
     .from("users")
-    .insert([{ ...newUser, avatar: imagePath }]);
+    .insert([{ ...newUser, avatar: avatarPath, cv: cvPath }]);
 
   if (insertError) {
     console.error(insertError);
@@ -34,12 +38,23 @@ export async function createUser(newUser) {
     throw new Error(insertError.message);
   }
 
-  const { error: storageError } = await supabase.storage
+  // Upload avatar to storage
+  const { error: avatarStorageError } = await supabase.storage
     .from("user-image")
-    .upload(imageName, newUser.avatar);
+    .upload(avatarName, newUser.avatar);
 
-  if (storageError) {
-    console.error(storageError);
-    throw new Error(storageError.message);
+  if (avatarStorageError) {
+    console.error(avatarStorageError);
+    throw new Error(`Avatar upload failed: ${avatarStorageError.message}`);
+  }
+
+  // Upload CV to storage
+  const { error: cvStorageError } = await supabase.storage
+    .from("cv-documents")
+    .upload(cvName, newUser.cv);
+
+  if (cvStorageError) {
+    console.error(cvStorageError);
+    throw new Error(`CV upload failed: ${cvStorageError.message}`);
   }
 }

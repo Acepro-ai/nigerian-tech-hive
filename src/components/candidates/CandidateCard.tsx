@@ -21,6 +21,7 @@ interface Candidate {
   email: string;
   phone: string;
   portfolio: string;
+  cv: string;
 }
 
 interface CandidateCardProps {
