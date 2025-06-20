@@ -3,6 +3,8 @@ import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Gaming = () => {
   const gameRoles = [
@@ -72,15 +74,24 @@ const Gaming = () => {
     <Layout>
       {/* Hero Section */}
       <section className="hero-gradient text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="text-6xl mb-6">🎮</div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Gaming Industry Talent
-          </h1>
-          <p className="text-xl text-red-100 max-w-3xl mx-auto">
-            From indie studios to AAA game development, we connect you with the gaming professionals 
-            who will bring your vision to life
-          </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Link to="/">
+            <Button variant="outline" className="mb-6 text-white border-white hover:bg-white hover:text-red-600 dark:border-white/20 dark:hover:bg-white/10">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Home
+            </Button>
+          </Link>
+          
+          <div className="text-center">
+            <div className="text-6xl mb-6">🎮</div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              Gaming Industry Talent
+            </h1>
+            <p className="text-xl text-red-100 max-w-3xl mx-auto">
+              From indie studios to AAA game development, we connect you with the gaming professionals 
+              who will bring your vision to life
+            </p>
+          </div>
         </div>
       </section>
 
@@ -156,6 +167,23 @@ const Gaming = () => {
               <p className="text-gray-600 text-sm mt-2">Proprietary development tools</p>
             </Card>
           </div>
+        </div>
+      </section>
+
+      {/* Job Seeker CTA Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Ready to Apply?
+          </h2>
+          <p className="text-xl mb-8 text-gray-600">
+            Join our network of gaming professionals and get access to exciting opportunities with top gaming companies worldwide.
+          </p>
+          <Link to="/job-seekers">
+            <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-lg px-8">
+              Join Our Network
+            </Button>
+          </Link>
         </div>
       </section>
 

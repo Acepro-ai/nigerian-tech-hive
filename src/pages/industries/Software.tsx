@@ -11,37 +11,37 @@ const Software = () => {
       title: "Full Stack Developer",
       description: "End-to-end web application development using modern frameworks",
       skills: ["React", "Node.js", "TypeScript", "PostgreSQL", "AWS"],
-      salaryRange: "$60,000 - $120,000"
+      salaryRange: "$60,000 - $250,000+"
     },
     {
       title: "Cloud Solutions Architect",
       description: "Design and implement scalable cloud infrastructure and services",
       skills: ["AWS", "Azure", "Kubernetes", "Terraform", "Microservices"],
-      salaryRange: "$90,000 - $160,000"
+      salaryRange: "$80,000 - $300,000+"
     },
     {
       title: "Mobile App Developer",
       description: "iOS and Android application development for enterprise clients",
       skills: ["React Native", "Swift", "Kotlin", "Flutter", "Firebase"],
-      salaryRange: "$65,000 - $115,000"
+      salaryRange: "$50,000 - $120,000"
     },
     {
       title: "Data Engineer",
       description: "Build data pipelines and analytics platforms for business intelligence",
       skills: ["Python", "Apache Spark", "SQL", "Docker", "ETL"],
-      salaryRange: "$70,000 - $130,000"
+      salaryRange: "$75,000 - $150,000+"
     },
     {
       title: "QA Automation Engineer",
       description: "Automated testing frameworks and quality assurance processes",
       skills: ["Selenium", "Jest", "Cypress", "Python", "CI/CD"],
-      salaryRange: "$55,000 - $100,000"
+      salaryRange: "$75,000 - $150,000+"
     },
     {
       title: "Product Manager (Technical)",
       description: "Drive product strategy and work closely with engineering teams",
       skills: ["Agile", "Scrum", "Jira", "Analytics", "Technical Background"],
-      salaryRange: "$80,000 - $140,000"
+      salaryRange: "$80,000 - $180,000+"
     }
   ];
 
@@ -226,6 +226,44 @@ const Software = () => {
             </div>
           </div>
         </div>
+
+        {/* Employer CTA Section */}
+        <section className="py-20 hero-gradient text-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready to Find Your Next Star Employee?
+            </h2>
+            <p className="text-xl mb-8 text-red-100">
+              You might have been struggling to find and hire the right candidates, but now our experts can tell you how to avoid common mistakes and accelerate interviews.
+            </p>
+            <p className="text-lg mb-8 text-red-100">
+              Book a Free consulting call with one of our recruitment experts to discuss:
+            </p>
+            <div className="grid md:grid-cols-2 gap-6 mb-8 text-left">
+              <div>
+                <h4 className="font-semibold mb-2">Your Budget vs. Expectations Match</h4>
+                <p className="text-red-100 text-sm">Let us analyze your expectations and provide feedback on whether they align with market standards.</p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-2">Your Offer Positioning</h4>
+                <p className="text-red-100 text-sm">Get feedback on who your vacancy could be the "Dream Job" for and whether the offer is compelling.</p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-2">Your Target Location</h4>
+                <p className="text-red-100 text-sm">Learn what tech hubs, cities, and countries would be a better fit given your budget constraints.</p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-2">Collaboration</h4>
+                <p className="text-red-100 text-sm">Discuss what we can do for you and how we can make the hiring process easy and seamless.</p>
+              </div>
+            </div>
+            <a href="https://calendly.com/zongsevenonline/meeting-with-marvelous-2?month=2025-06" target="_blank" rel="noopener noreferrer">
+              <Button size="lg" className="bg-white text-red-600 hover:bg-gray-100 text-lg px-8">
+                Book a Free Consulting Call
+              </Button>
+            </a>
+          </div>
+        </section>
       </div>
     </Layout>
   );

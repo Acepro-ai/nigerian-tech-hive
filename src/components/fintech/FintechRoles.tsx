@@ -7,25 +7,25 @@ const FintechRoles = () => {
       title: "Blockchain Developer",
       description: "Smart contract development, DeFi protocols, cryptocurrency systems",
       skills: ["Solidity", "Web3.js", "Ethereum", "Smart Contracts"],
-      salaryRange: "$80,000 - $150,000"
+      salaryRange: "$60,000 - $150,000"
     },
     {
       title: "Backend Engineer (Payments)",
       description: "Payment processing systems, fraud detection, financial APIs",
       skills: ["Node.js", "Python", "PostgreSQL", "Redis", "AWS"],
-      salaryRange: "$70,000 - $120,000"
+      salaryRange: "$70,000 - $190,000"
     },
     {
       title: "Frontend Developer (Mobile Banking)",
       description: "Mobile banking apps, web platforms, user authentication",
       skills: ["React Native", "Flutter", "React.js", "TypeScript"],
-      salaryRange: "$65,000 - $110,000"
+      salaryRange: "$70,000 - $200,000"
     },
     {
       title: "DevOps Engineer (Financial Systems)",
       description: "Infrastructure automation, security compliance, monitoring",
       skills: ["Kubernetes", "Docker", "Terraform", "CI/CD", "Security"],
-      salaryRange: "$75,000 - $130,000"
+      salaryRange: "$75,000 - $150,000"
     }
   ];
 
