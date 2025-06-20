@@ -78,7 +78,7 @@ const Layout = ({ children }: LayoutProps) => {
                   <DropdownMenuItem asChild>
                     <Link to="/industries/software" className="w-full dark:text-gray-300">Software and Services</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem disabled>
+                  {/* <DropdownMenuItem disabled>
                     <span className="w-full text-gray-400">Healthcare (Coming Soon)</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem disabled>
@@ -86,7 +86,7 @@ const Layout = ({ children }: LayoutProps) => {
                   </DropdownMenuItem>
                   <DropdownMenuItem disabled>
                     <span className="w-full text-gray-400">EdTech (Coming Soon)</span>
-                  </DropdownMenuItem>
+                  </DropdownMenuItem> */}
                 </DropdownMenuContent>
               </DropdownMenu>
 
@@ -172,9 +172,9 @@ const Layout = ({ children }: LayoutProps) => {
                 >
                   Software and Services
                 </Link>
-                <div className="pl-4 text-gray-400">Healthcare (Coming Soon)</div>
+                {/* <div className="pl-4 text-gray-400">Healthcare (Coming Soon)</div>
                 <div className="pl-4 text-gray-400">E-commerce (Coming Soon)</div>
-                <div className="pl-4 text-gray-400">EdTech (Coming Soon)</div>
+                <div className="pl-4 text-gray-400">EdTech (Coming Soon)</div> */}
               </div>
 
               <Link

@@ -21,7 +21,7 @@ const HeroBanner = () => {
               </Button>
             </Link>
             <Link to="/candidates">
-              <Button size="lg" variant="outline" className="transition-colors">
+              <Button size="lg" variant="secondary" className="transition-colors">
                 View Talent Pool
               </Button>
             </Link>

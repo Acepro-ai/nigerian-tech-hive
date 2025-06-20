@@ -30,7 +30,7 @@ const Index = () => {
                   Hire Talent <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-red-600 text-lg px-8">
+              <Button size="lg" className="border-white text-white hover:bg-white hover:text-red-600 text-lg px-8">
                 <Link to="/job-seekers">Find Jobs</Link>
               </Button>
             </div>
