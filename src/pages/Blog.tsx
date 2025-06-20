@@ -9,30 +9,39 @@ const Blog = () => {
   const blogPosts = [
     {
       id: 1,
-      title: "The Rise of Remote Work in Nigerian Tech",
-      excerpt: "Exploring how Nigerian developers are leveraging remote opportunities to work with global companies and advance their careers.",
+      title: "Hiring Tech Talent from Nigeria: A Guide to Tapping into a Growing Workforce",
+      excerpt: "In the rapidly evolving landscape of technology, companies across the globe are increasingly looking to diversify their talent pool. Nigeria's vibrant tech ecosystem presents an invaluable opportunity for organizations seeking innovative, cost-effective solutions.",
       author: "Sarah Johnson",
       date: "December 15, 2024",
-      readTime: "5 min read",
-      category: "Career Development"
+      readTime: "12 min read",
+      category: "Talent Acquisition"
     },
     {
       id: 2,
-      title: "Top Programming Languages for 2024",
-      excerpt: "A comprehensive guide to the most in-demand programming languages and frameworks that Nigerian developers should focus on.",
+      title: "Hiring Blockchain and Web3 Experts: A Comprehensive Guide",
+      excerpt: "As blockchain and Web3 technologies continue to redefine industries across the globe, the demand for specialized talent has skyrocketed. This comprehensive guide explores how to find, evaluate, and retain top-tier blockchain professionals.",
       author: "Michael Chen",
       date: "December 10, 2024",
-      readTime: "8 min read",
-      category: "Technology"
+      readTime: "15 min read",
+      category: "Blockchain & Web3"
     },
     {
       id: 3,
-      title: "Building a Strong Tech Portfolio",
-      excerpt: "Essential tips for creating a portfolio that stands out to international employers and showcases your technical skills effectively.",
+      title: "The Potentials of the C# Programming Language",
+      excerpt: "C# has evolved from a simple, object-oriented language into a powerful tool capable of handling a wide range of applications. Discover why C# continues to be one of the most popular choices for developers worldwide.",
       author: "Emily Rodriguez",
+      date: "December 8, 2024",
+      readTime: "10 min read",
+      category: "Programming Languages"
+    },
+    {
+      id: 4,
+      title: "IT Job Market Trends: Opportunities and Skills in Demand",
+      excerpt: "The IT job market is constantly evolving, and as technology continues to advance, the demand for new skills and expertise changes. Understanding these trends can help both job seekers and employers navigate this fast-paced industry.",
+      author: "David Kim",
       date: "December 5, 2024",
-      readTime: "6 min read",
-      category: "Career Tips"
+      readTime: "8 min read",
+      category: "Career Development"
     }
   ];
 
@@ -59,7 +68,7 @@ const Blog = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
             {blogPosts.map((post) => (
               <Card key={post.id} className="card-hover bg-white dark:bg-gray-800">
                 <CardHeader>
@@ -118,4 +127,3 @@ const Blog = () => {
 };
 
 export default Blog;
-
