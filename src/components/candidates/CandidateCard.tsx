@@ -22,6 +22,7 @@ interface Candidate {
   phone: string;
   portfolio: string;
   cv: string;
+  premium: boolean;
 }
 
 interface CandidateCardProps {
@@ -56,6 +57,11 @@ const CandidateCard = ({ candidate }: CandidateCardProps) => {
           </div>
           <CardTitle className="text-xl text-gray-900 dark:text-white">
             {candidate.fullName}
+            {candidate.premium && (
+              <Badge className="ml-2 bg-yellow-500 text-white">
+                Premium
+              </Badge>
+            )}
           </CardTitle>
           <p className="text-red-600 dark:text-red-400 font-medium">
             {candidate.title}

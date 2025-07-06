@@ -2,7 +2,7 @@
 import supabase from "./supabase";
 
 export default async function getUsers() {
-  const { data: users, error } = await supabase.from("users").select("*");
+  const { data: users, error } = await supabase.from("users").select("*").order('premium', { ascending: false }).order('created_at', { ascending: false });
 
   if (error) {
     console.error(error); // Log the error
@@ -25,7 +25,7 @@ export async function createUser(newUser) {
   // Insert user data with both avatar and CV paths
   const { error: insertError } = await supabase
     .from("users")
-    .insert([{ ...newUser, avatar: avatarPath, cv: cvPath }]);
+    .insert([{ ...newUser, avatar: avatarPath, cv: cvPath, premium: newUser.premium || false }]);
 
   if (insertError) {
     console.error(insertError);

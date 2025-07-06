@@ -71,7 +71,31 @@ const JobSeekersForm = () => {
   });
 
   const onSubmit = (data) => {
-    mutate({ ...data, avatar: data.avatar[0], cv: data.cv[0] });
+    // If premium plan is selected, redirect to Paystack
+    if (data.plan === 'premium') {
+      // Save user data first with premium status
+      mutate({ 
+        ...data, 
+        avatar: data.avatar[0], 
+        cv: data.cv[0], 
+        premium: true 
+      });
+      
+      // Redirect to Paystack payment link
+      setTimeout(() => {
+        window.open('https://paystack.shop/pay/n6i4e47xjf', '_blank');
+      }, 1000); // Small delay to ensure data is saved
+      
+      return;
+    }
+    
+    // For free plan, save normally
+    mutate({ 
+      ...data, 
+      avatar: data.avatar[0], 
+      cv: data.cv[0], 
+      premium: false 
+    });
   };
 
   return (
