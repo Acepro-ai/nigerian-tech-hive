@@ -1,9 +1,8 @@
-
-import React from 'react';
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { createUser } from "../../libs/users";
@@ -11,9 +10,10 @@ import PlanSelection from "./PlanSelection";
 import PersonalInfoSection from "./PersonalInfoSection";
 import ProfessionalInfoSection from "./ProfessionalInfoSection";
 import FileUploadSection from "./FileUploadSection";
+import PaymentModal from "./PaymentModal";
 
 type JobSeekerFormData = {
-  plan: string;
+  plan: "free" | "premium";
   availability: string;
   fullName: string;
   email: string;
@@ -30,31 +30,34 @@ type JobSeekerFormData = {
 
 const JobSeekersForm = () => {
   const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
+  const [tempUserData, setTempUserData] = useState<JobSeekerFormData | null>(
+    null
+  );
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<JobSeekerFormData>({
+  const methods = useForm<JobSeekerFormData>({
     defaultValues: {
       plan: "free",
       availability: "immediate",
     },
   });
-  const queryClient = useQueryClient();
 
   const { isPending, mutate } = useMutation({
-    mutationFn: (newUser) => createUser(newUser),
-    onSuccess: () => {
+    mutationFn: (newUser: any) => createUser(newUser),
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       toast({
-        title: "Candidate successfully registered!",
-        description: "Your profile has been submitted.",
+        title: variables.premium
+          ? "Premium Activated!"
+          : "Registration Complete",
+        description: variables.premium
+          ? "Your premium access is now active."
+          : "Your profile has been submitted.",
       });
-      reset();
+      methods.reset();
     },
-    onError: (error) => {
+    onError: (error: any) => {
       toast({
         title: "Error",
         description: error.message || "Something went wrong",
@@ -63,31 +66,29 @@ const JobSeekersForm = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    // If premium plan is selected, redirect to Paystack
-    if (data.plan === 'premium') {
-      // Save user data first with premium status
-      mutate({ 
-        ...data, 
-        avatar: data.avatar[0], 
-        cv: data.cv[0], 
-        premium: true 
-      });
-      
-      // Redirect to Paystack payment link
-      setTimeout(() => {
-        window.open('https://paystack.shop/pay/n6i4e47xjf', '_blank');
-      }, 1000); // Small delay to ensure data is saved
-      
+  const onSubmit = (data: JobSeekerFormData) => {
+    if (data.plan === "premium") {
+      setTempUserData(data);
+      setPaymentModalOpen(true);
       return;
     }
-    
-    // For free plan, save normally
-    mutate({ 
-      ...data, 
-      avatar: data.avatar[0], 
-      cv: data.cv[0], 
-      premium: false 
+
+    mutate({
+      ...data,
+      avatar: data.avatar[0],
+      cv: data.cv[0],
+      premium: false,
+    });
+  };
+
+  const handlePaymentSuccess = () => {
+    if (!tempUserData) return;
+
+    mutate({
+      ...tempUserData,
+      avatar: tempUserData.avatar[0],
+      cv: tempUserData.cv[0],
+      premium: true,
     });
   };
 
@@ -100,22 +101,37 @@ const JobSeekersForm = () => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <PlanSelection register={register} />
-          
-          <PersonalInfoSection register={register} errors={errors} />
-          
-          <ProfessionalInfoSection register={register} errors={errors} />
-          
-          <FileUploadSection register={register} errors={errors} />
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
+            <PlanSelection />
+            <PersonalInfoSection />
+            <ProfessionalInfoSection 
+              register={methods.register} 
+              errors={methods.formState.errors} 
+            />
+            <FileUploadSection 
+              register={methods.register} 
+              errors={methods.formState.errors} 
+            />
 
-          {/* Submit Button */}
-          <div className="text-right">
-            <Button type="submit" disabled={isPending} className="px-8 py-3 text-lg">
-              {isPending ? "Submitting..." : "Submit Application"}
-            </Button>
-          </div>
-        </form>
+            <div className="text-right">
+              <Button
+                type="submit"
+                disabled={isPending}
+                className="px-8 py-3 text-lg"
+              >
+                {isPending ? "Submitting..." : "Submit Application"}
+              </Button>
+            </div>
+          </form>
+        </FormProvider>
+
+        <PaymentModal
+          open={paymentModalOpen}
+          onClose={() => setPaymentModalOpen(false)}
+          onPaymentSuccess={handlePaymentSuccess}
+          userEmail={methods.watch("email")}
+        />
       </CardContent>
     </Card>
   );

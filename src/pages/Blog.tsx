@@ -1,4 +1,3 @@
-
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,8 +12,10 @@ const Blog = () => {
   const blogPosts = [
     {
       id: 1,
-      title: "Hiring Tech Talent from Nigeria: A Guide to Tapping into a Growing Workforce",
-      excerpt: "In the rapidly evolving landscape of technology, companies across the globe are increasingly looking to diversify their talent pool. Nigeria's vibrant tech ecosystem presents an invaluable opportunity for organizations seeking innovative, cost-effective solutions.",
+      title:
+        "Hiring Tech Talent from Nigeria: A Guide to Tapping into a Growing Workforce",
+      excerpt:
+        "In the rapidly evolving landscape of technology, companies across the globe are increasingly looking to diversify their talent pool. Nigeria's vibrant tech ecosystem presents an invaluable opportunity for organizations seeking innovative, cost-effective solutions.",
       fullContent: `In the rapidly evolving landscape of technology, companies across the globe are increasingly looking to diversify their talent pool. As remote work continues to rise in prominence, one country that has become a focal point for tech talent is Nigeria. The country's vibrant tech ecosystem, combined with its growing pool of skilled professionals, presents an invaluable opportunity for organizations seeking innovative, cost-effective solutions to their staffing needs. This article delves deep into the nuances of hiring tech talent from Nigeria, exploring the unique advantages, challenges, and practical steps to successfully integrate Nigerian developers, engineers, and other tech professionals into your remote teams.
 
 Why Nigeria?
@@ -98,12 +99,13 @@ Hiring tech talent from Nigeria presents an opportunity to access a rich and div
 As companies continue to explore the benefits of remote work, Nigeria stands out as a key partner in this digital transformation. With the right strategies in place, you can unlock the potential of Nigeria's tech talent and drive your business forward.`,
       date: "2025",
       readTime: "12 min read",
-      category: "Talent Acquisition"
+      category: "Talent Acquisition",
     },
     {
       id: 2,
       title: "Hiring Blockchain and Web3 Experts: A Comprehensive Guide",
-      excerpt: "As blockchain and Web3 technologies continue to redefine industries across the globe, the demand for specialized talent has skyrocketed. This comprehensive guide explores how to find, evaluate, and retain top-tier blockchain professionals.",
+      excerpt:
+        "As blockchain and Web3 technologies continue to redefine industries across the globe, the demand for specialized talent has skyrocketed. This comprehensive guide explores how to find, evaluate, and retain top-tier blockchain professionals.",
       fullContent: `As blockchain and Web3 technologies continue to redefine industries across the globe, the demand for specialized talent has skyrocketed. This surge in interest is not only shaping the way businesses operate but is also opening the door to new opportunities in sectors like finance, healthcare, supply chain, gaming, and beyond. However, despite the rapid growth of the space, recruiting top-tier blockchain and Web3 experts remains a challenge for many organizations, especially given the highly technical and fast-evolving nature of these fields.
 
 This article aims to provide a thorough understanding of the intricacies of hiring blockchain and Web3 experts. We'll explore the specific skill sets required, where to find the best talent, how to evaluate potential hires, and how to build a remote-friendly, sustainable environment for these highly sought-after professionals.
@@ -239,12 +241,13 @@ Conclusion
 Hiring blockchain and Web3 talent requires a deep understanding of the unique technical skills required, as well as the rapid pace at which these technologies are evolving. Whether you're looking for experts in smart contract development, DeFi, tokenomics, or decentralized app creation, focusing on the right recruitment strategies, evaluating candidates through rigorous assessments, and building an environment that fosters innovation will help you find and retain the talent you need to succeed in this exciting and transformative space.`,
       date: "2025",
       readTime: "15 min read",
-      category: "Blockchain & Web3"
+      category: "Blockchain & Web3",
     },
     {
       id: 3,
       title: "The Potentials of the C# Programming Language",
-      excerpt: "C# has evolved from a simple, object-oriented language into a powerful tool capable of handling a wide range of applications. Discover why C# continues to be one of the most popular choices for developers worldwide.",
+      excerpt:
+        "C# has evolved from a simple, object-oriented language into a powerful tool capable of handling a wide range of applications. Discover why C# continues to be one of the most popular choices for developers worldwide.",
       fullContent: `C# (pronounced "C-sharp") is a programming language that has stood the test of time and continues to be one of the most popular choices for developers worldwide. Over the years, it has evolved from a simple, object-oriented language into a powerful tool capable of handling a wide range of applications, from desktop software to mobile apps, and even complex cloud-based systems. Its versatility, along with its deep integration with Microsoft technologies, makes C# an essential language in modern software development.
 
 1. Strong Ties with Microsoft Technologies
@@ -326,12 +329,13 @@ C# is widely adopted in enterprise environments, particularly because of its clo
 Additionally, as companies increasingly migrate to cloud-based systems, C#'s seamless integration with Microsoft Azure makes it a preferred language for building cloud-native applications. With Azure, C# developers can build and deploy scalable applications, manage databases, and take advantage of machine learning, artificial intelligence, and other advanced features.`,
       date: "2025",
       readTime: "10 min read",
-      category: "Programming Languages"
+      category: "Programming Languages",
     },
     {
       id: 4,
       title: "IT Job Market Trends: Opportunities and Skills in Demand",
-      excerpt: "The IT job market is constantly evolving, and as technology continues to advance, the demand for new skills and expertise changes. Understanding these trends can help both job seekers and employers navigate this fast-paced industry.",
+      excerpt:
+        "The IT job market is constantly evolving, and as technology continues to advance, the demand for new skills and expertise changes. Understanding these trends can help both job seekers and employers navigate this fast-paced industry.",
       fullContent: `The IT job market is constantly evolving, and as technology continues to advance, the demand for new skills and expertise changes. From the rise of cloud computing and AI to the increasing importance of cybersecurity, IT professionals are finding new opportunities in a variety of fields. Understanding these trends can help both job seekers and employers navigate this fast-paced industry and stay ahead of the curve.
 
 1. Growth in Cloud Computing
@@ -439,17 +443,17 @@ The demand for data-driven decision-making is increasing across industries. As b
 Data professionals with expertise in data visualization, machine learning, and big data technologies are especially in demand as companies continue to harness the power of data.`,
       date: "2025",
       readTime: "8 min read",
-      category: "Career Development"
-    }
+      category: "Career Development",
+    },
   ];
 
   const togglePostExpansion = (postId: number) => {
     if (fullPagePost === postId) {
       setFullPagePost(null);
     } else {
-      setExpandedPosts(prev => 
-        prev.includes(postId) 
-          ? prev.filter(id => id !== postId)
+      setExpandedPosts((prev) =>
+        prev.includes(postId)
+          ? prev.filter((id) => id !== postId)
           : [...prev, postId]
       );
     }
@@ -465,7 +469,7 @@ Data professionals with expertise in data visualization, machine learning, and b
   };
 
   if (fullPagePost) {
-    const post = blogPosts.find(p => p.id === fullPagePost);
+    const post = blogPosts.find((p) => p.id === fullPagePost);
     if (!post) return null;
 
     return (
@@ -473,8 +477,8 @@ Data professionals with expertise in data visualization, machine learning, and b
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={backToGrid}
                 className="mb-6 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-800"
               >
@@ -487,11 +491,11 @@ Data professionals with expertise in data visualization, machine learning, and b
               <div className="text-sm text-red-600 font-medium mb-4">
                 {post.category}
               </div>
-              
+
               <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
                 {post.title}
               </h1>
-              
+
               <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-8 space-x-6">
                 <div className="flex items-center">
                   <Calendar className="h-4 w-4 mr-2" />
@@ -502,10 +506,13 @@ Data professionals with expertise in data visualization, machine learning, and b
                   {post.readTime}
                 </div>
               </div>
-              
+
               <div className="prose prose-lg max-w-none dark:prose-invert">
-                {post.fullContent.split('\n\n').map((paragraph, index) => (
-                  <p key={index} className="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+                {post.fullContent.split("\n\n").map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed"
+                  >
                     {paragraph}
                   </p>
                 ))}
@@ -523,26 +530,32 @@ Data professionals with expertise in data visualization, machine learning, and b
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <Link to="/">
-              <Button variant="outline" className="mb-6 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-800">
+              <Button
+                variant="outline"
+                className="mb-6 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-800"
+              >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Button>
             </Link>
           </div>
-          
+
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Tech Career & Industry Insights
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Stay updated with the latest trends, career advice, and opportunities 
-              in the global tech industry.
+              Stay updated with the latest trends, career advice, and
+              opportunities in the global tech industry.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
             {blogPosts.map((post) => (
-              <Card key={post.id} className="card-hover bg-white dark:bg-gray-800">
+              <Card
+                key={post.id}
+                className="card-hover bg-white dark:bg-gray-800"
+              >
                 <CardHeader>
                   <div className="text-sm text-red-600 font-medium mb-2">
                     {post.category}
@@ -553,7 +566,9 @@ Data professionals with expertise in data visualization, machine learning, and b
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    {expandedPosts.includes(post.id) ? post.fullContent.substring(0, 500) + '...' : post.excerpt}
+                    {expandedPosts.includes(post.id)
+                      ? post.fullContent.substring(0, 500) + "..."
+                      : post.excerpt}
                   </p>
                   <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
                     <div className="flex items-center">
@@ -566,14 +581,16 @@ Data professionals with expertise in data visualization, machine learning, and b
                     {post.date}
                   </div>
                   <div className="flex gap-2">
-                    <Button 
+                    <Button
                       onClick={() => togglePostExpansion(post.id)}
                       variant="outline"
                       className="flex-1"
                     >
-                      {expandedPosts.includes(post.id) ? 'Read Less' : 'Read More'}
+                      {expandedPosts.includes(post.id)
+                        ? "Read Less"
+                        : "Read More"}
                     </Button>
-                    <Button 
+                    <Button
                       onClick={() => showFullPage(post.id)}
                       className="flex-1 bg-red-600 hover:bg-red-700 text-white"
                     >
@@ -592,8 +609,9 @@ Data professionals with expertise in data visualization, machine learning, and b
                 More Content Coming Soon!
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                We're working on bringing you more valuable insights, career guides, 
-                and industry analysis. Subscribe to our newsletter to stay updated.
+                We're working on bringing you more valuable insights, career
+                guides, and industry analysis. Subscribe to our newsletter to
+                stay updated.
               </p>
               <Button className="bg-red-600 hover:bg-red-700 text-white dark:bg-red-600 dark:hover:bg-red-700 dark:text-white">
                 Subscribe to Newsletter
