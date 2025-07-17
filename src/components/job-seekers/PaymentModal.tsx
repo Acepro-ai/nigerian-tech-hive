@@ -62,7 +62,7 @@ const PaymentModal = ({
     const handler = window.PaystackPop.setup({
       key: "pk_live_60e482d0d8784edb5bb19b5f812d8bc07f8a1817",
       email: userEmail,
-      amount: 100000, // ₦5,000 in kobo
+      amount: 50000, // ₦5,000 in kobo
       ref: `PS_${Date.now()}`,
       onClose: () => {
         setStatus("failed");
@@ -124,7 +124,7 @@ const PaymentModal = ({
           <>
             <h3 className="text-lg font-bold mb-4">Complete Premium Payment</h3>
             <div className="mb-6 space-y-2">
-              <p>You're about to upgrade to our premium plan for ₦1000.</p>
+              <p>You're about to upgrade to our premium plan for ₦500.</p>
               <p className="text-sm text-muted-foreground">
                 This includes priority profile placement and recruiter access.
               </p>
