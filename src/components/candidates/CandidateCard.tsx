@@ -22,7 +22,7 @@ interface Candidate {
   phone: string;
   portfolio: string;
   cv: string;
-  premium: boolean;
+  plan: "free" | "premium";
 }
 
 interface CandidateCardProps {
@@ -57,7 +57,7 @@ const CandidateCard = ({ candidate }: CandidateCardProps) => {
           </div>
           <CardTitle className="text-xl text-gray-900 dark:text-white">
             {candidate.fullName}
-            {candidate.premium && (
+            {candidate.plan === "premium" && (
               <Badge className="ml-2 bg-yellow-500 text-white">
                 Premium
               </Badge>

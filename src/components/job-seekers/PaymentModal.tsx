@@ -11,8 +11,6 @@ declare global {
   }
 }
 
-console.log(process.env);
-
 interface PaymentModalProps {
   open: boolean;
   onClose: () => void;
@@ -62,7 +60,7 @@ const PaymentModal = ({
     const handler = window.PaystackPop.setup({
       key: "pk_live_60e482d0d8784edb5bb19b5f812d8bc07f8a1817",
       email: userEmail,
-      amount: 50000, // ₦5,000 in kobo
+      amount: 18500000, // ₦5,000 in kobo
       ref: `PS_${Date.now()}`,
       onClose: () => {
         setStatus("failed");
@@ -124,10 +122,13 @@ const PaymentModal = ({
           <>
             <h3 className="text-lg font-bold mb-4">Complete Premium Payment</h3>
             <div className="mb-6 space-y-2">
-              <p>You're about to upgrade to our premium plan for ₦500.</p>
+              <p>
+                You're about to upgrade to our premium plan for ₦185,000.00.
+              </p>
               <p className="text-sm text-muted-foreground">
                 This includes priority profile placement and recruiter access.
               </p>
+              x``
             </div>
 
             <div className="flex justify-end space-x-3">

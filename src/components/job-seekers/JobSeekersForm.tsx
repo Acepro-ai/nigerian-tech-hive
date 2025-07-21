@@ -16,11 +16,13 @@ type JobSeekerFormData = {
   plan: "free" | "premium";
   availability: string;
   fullName: string;
+  title: string; 
   email: string;
   phone: string;
   location: string;
   experience: string;
-  skills: string;
+  hourlyRate: string; 
+  skillsInput: string;
   portfolio: string;
   expectedSalary: string;
   bio: string;
@@ -32,14 +34,15 @@ const JobSeekersForm = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
-  const [tempUserData, setTempUserData] = useState<JobSeekerFormData | null>(
-    null
-  );
+  const [tempUserData, setTempUserData] = useState<
+    (Omit<JobSeekerFormData, "skillsInput"> & { skills: string[] }) | null
+  >(null);
 
   const methods = useForm<JobSeekerFormData>({
     defaultValues: {
       plan: "free",
       availability: "immediate",
+      hourlyRate: "", 
     },
   });
 
@@ -66,30 +69,33 @@ const JobSeekersForm = () => {
     },
   });
 
+  const formatSkills = (skillsString: string): string[] => {
+    return skillsString
+      .split(/\s*[, ]\s*/)
+      .filter((skill) => skill.trim() !== "");
+  };
+
   const onSubmit = (data: JobSeekerFormData) => {
+    const formattedData = {
+      ...data,
+      skills: formatSkills(data.skillsInput),
+      avatar: data.avatar[0],
+      cv: data.cv[0],
+      premium: data.plan === "premium",
+    };
+
     if (data.plan === "premium") {
-      setTempUserData(data);
+      setTempUserData(formattedData);
       setPaymentModalOpen(true);
       return;
     }
 
-    mutate({
-      ...data,
-      avatar: data.avatar[0],
-      cv: data.cv[0],
-      premium: false,
-    });
+    mutate(formattedData);
   };
 
   const handlePaymentSuccess = () => {
     if (!tempUserData) return;
-
-    mutate({
-      ...tempUserData,
-      avatar: tempUserData.avatar[0],
-      cv: tempUserData.cv[0],
-      premium: true,
-    });
+    mutate(tempUserData);
   };
 
   return (
@@ -105,13 +111,13 @@ const JobSeekersForm = () => {
           <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
             <PlanSelection />
             <PersonalInfoSection />
-            <ProfessionalInfoSection 
-              register={methods.register} 
-              errors={methods.formState.errors} 
+            <ProfessionalInfoSection
+              register={methods.register}
+              errors={methods.formState.errors}
             />
-            <FileUploadSection 
-              register={methods.register} 
-              errors={methods.formState.errors} 
+            <FileUploadSection
+              register={methods.register}
+              errors={methods.formState.errors}
             />
 
             <div className="text-right">

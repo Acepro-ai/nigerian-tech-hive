@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -16,9 +16,29 @@ interface ProfessionalInfoSectionProps {
   errors: FieldErrors<any>;
 }
 
-const ProfessionalInfoSection = ({ register, errors }: ProfessionalInfoSectionProps) => {
+const ProfessionalInfoSection = ({
+  register,
+  errors,
+}: ProfessionalInfoSectionProps) => {
   return (
     <>
+      {/* Professional Title */}
+      <div>
+        <Label htmlFor="title" className="dark:text-white">
+          Professional Title
+        </Label>
+        <Input
+          id="title"
+          {...register("title", {
+            required: "Title is required",
+          })}
+          placeholder="e.g. Frontend Developer"
+        />
+        {errors.title && (
+          <p className="text-red-500 text-sm">{String(errors.title.message)}</p>
+        )}
+      </div>
+
       {/* Experience */}
       <div>
         <Label htmlFor="experience" className="dark:text-white">
@@ -38,12 +58,37 @@ const ProfessionalInfoSection = ({ register, errors }: ProfessionalInfoSectionPr
         )}
       </div>
 
+      {/* Hourly Rate */}
+      <div>
+        <Label htmlFor="hourlyRate" className="dark:text-white">
+          Hourly Rate (USD)
+        </Label>
+        <Input id="hourlyRate" type="number" {...register("hourlyRate")} />
+      </div>
+
       {/* Skills */}
       <div>
-        <Label htmlFor="skills" className="dark:text-white">
-          Skills
+        <Label htmlFor="skillsInput" className="dark:text-white">
+          Skills (separate with spaces or commas)
         </Label>
-        <Input id="skills" {...register("skills")} />
+        <Input
+          id="skillsInput"
+          {...register("skillsInput", {
+            required: "Skills are required",
+            validate: (value) => {
+              const skills = value
+                .split(/\s*[, ]\s*/)
+                .filter((skill) => skill.trim() !== "");
+              return skills.length > 0 || "Please enter at least one skill";
+            },
+          })}
+          placeholder="e.g. JavaScript React CSS or JavaScript, React, CSS"
+        />
+        {errors.skillsInput && (
+          <p className="text-red-500 text-sm">
+            {String(errors.skillsInput.message)}
+          </p>
+        )}
       </div>
 
       {/* Portfolio */}
