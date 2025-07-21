@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2, CheckCircle2, XCircle } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 declare global {
   interface Window {
@@ -25,6 +26,7 @@ const PaymentModal = ({
   userEmail,
 }: PaymentModalProps) => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [status, setStatus] = useState<
     "idle" | "processing" | "success" | "failed"
   >("idle");
@@ -78,6 +80,11 @@ const PaymentModal = ({
             title: "Payment Successful!",
             description: "Your premium access has been activated",
           });
+          // Redirect to success page after a short delay
+          setTimeout(() => {
+            onClose();
+            navigate("/payment-success");
+          }, 1500);
         } else {
           setStatus("failed");
           toast({
@@ -101,10 +108,10 @@ const PaymentModal = ({
           <div className="text-center space-y-4">
             <CheckCircle2 className="mx-auto h-12 w-12 text-green-500" />
             <h3 className="text-lg font-bold">Payment Successful!</h3>
-            <p>Your premium access is now active.</p>
-            <Button onClick={onClose} className="mt-4">
-              Continue
-            </Button>
+            <p>Redirecting to confirmation page...</p>
+            <div className="flex justify-center">
+              <Loader2 className="h-6 w-6 animate-spin text-green-500" />
+            </div>
           </div>
         ) : status === "failed" ? (
           <div className="text-center space-y-4">

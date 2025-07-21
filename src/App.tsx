@@ -11,6 +11,7 @@ import Blog from "./pages/Blog";
 import Gaming from "./pages/industries/Gaming";
 import Fintech from "./pages/industries/Fintech";
 import Software from "./pages/industries/Software";
+import PaymentSuccess from "./pages/PaymentSuccess";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="/industries/gaming" element={<Gaming />} />
           <Route path="/industries/fintech" element={<Fintech />} />
           <Route path="/industries/software" element={<Software />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
