@@ -31,7 +31,7 @@ const Index = () => {
                 </Link>
               </Button>
               <Button size="lg" className="border-white text-white hover:bg-white hover:text-red-600 text-lg px-8">
-                <Link to="/job-seekers">Find Jobs</Link>
+                <Link to="/job-seekers">Get Hired</Link>
               </Button>
             </div>
           </div>
@@ -41,14 +41,10 @@ const Index = () => {
       {/* Stats Section */}
       <section className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
+          <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
               <div className="text-4xl font-bold text-red-600 mb-2">500+</div>
               <div className="text-gray-600 dark:text-gray-300">Talented Professionals</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-red-600 mb-2">100+</div>
-              <div className="text-gray-600 dark:text-gray-300">Companies Served</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-red-600 mb-2">95%</div>

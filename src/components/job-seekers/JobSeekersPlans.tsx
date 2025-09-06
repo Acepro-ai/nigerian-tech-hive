@@ -63,7 +63,7 @@ const JobSeekersPlans = () => {
               Premium
             </CardTitle>
             <div className="text-3xl font-bold text-red-600 mb-2">
-              $100
+              $120
             </div>
             <p className="text-gray-600 dark:text-gray-300">
               Everything in Free plus exclusive features
