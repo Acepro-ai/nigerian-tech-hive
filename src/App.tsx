@@ -12,6 +12,14 @@ import Gaming from "./pages/industries/Gaming";
 import Fintech from "./pages/industries/Fintech";
 import Software from "./pages/industries/Software";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import PostJobs from "./pages/PostJobs";
+import EmployerPaymentSuccess from "./pages/EmployerPaymentSuccess";
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminJobManagement from "./pages/admin/AdminJobManagement";
+import AdminUserManagement from "./pages/admin/AdminUserManagement";
+import AdminAnalytics from "./pages/admin/AdminAnalytics";
+import AdminSettings from "./pages/admin/AdminSettings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -41,6 +49,18 @@ const App = () => (
           <Route path="/industries/fintech" element={<Fintech />} />
           <Route path="/industries/software" element={<Software />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
+          <Route path="/post-jobs" element={<PostJobs />} />
+          <Route path="/employer-payment-success" element={<EmployerPaymentSuccess />} />
+          
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="jobs" element={<AdminJobManagement />} />
+            <Route path="users" element={<AdminUserManagement />} />
+            <Route path="analytics" element={<AdminAnalytics />} />
+            <Route path="settings" element={<AdminSettings />} />
+          </Route>
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

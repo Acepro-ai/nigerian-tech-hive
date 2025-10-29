@@ -31,6 +31,11 @@ const Index = () => {
                 </Link>
               </Button>
               <Button size="lg" className="border-white text-white hover:bg-white hover:text-red-600 text-lg px-8">
+                <Link to="/post-jobs" className="flex items-center">
+                  Post Jobs <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-red-600 text-lg px-8">
                 <Link to="/job-seekers">Get Hired</Link>
               </Button>
             </div>

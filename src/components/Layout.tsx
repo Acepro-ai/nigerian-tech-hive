@@ -100,6 +100,15 @@ const Layout = ({ children }: LayoutProps) => {
               </Link>
 
               <Link
+                to="/post-jobs"
+                className={`text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors ${
+                  isActive('/post-jobs') ? 'text-red-600 dark:text-red-400 font-medium' : ''
+                }`}
+              >
+                Post Jobs
+              </Link>
+
+              <Link
                 to="/job-seekers"
                 className={`text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors ${
                   isActive('/job-seekers') ? 'text-red-600 dark:text-red-400 font-medium' : ''
@@ -115,6 +124,15 @@ const Layout = ({ children }: LayoutProps) => {
                 }`}
               >
                 Blog
+              </Link>
+
+              <Link
+                to="/admin"
+                className={`text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors ${
+                  isActive('/admin') ? 'text-red-600 dark:text-red-400 font-medium' : ''
+                }`}
+              >
+                Admin
               </Link>
 
               <Button
@@ -186,6 +204,14 @@ const Layout = ({ children }: LayoutProps) => {
               </Link>
 
               <Link
+                to="/post-jobs"
+                className="block text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Post Jobs
+              </Link>
+
+              <Link
                 to="/job-seekers"
                 className="block text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
@@ -199,6 +225,14 @@ const Layout = ({ children }: LayoutProps) => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Blog
+              </Link>
+
+              <Link
+                to="/admin"
+                className="block text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Admin
               </Link>
             </div>
           )}
@@ -239,6 +273,7 @@ const Layout = ({ children }: LayoutProps) => {
               <h3 className="font-semibold mb-4">Services</h3>
               <ul className="space-y-2 text-gray-400">
                 <li><Link to="/hire-nigerian-experts" className="hover:text-white transition-colors">Hire Nigerian Experts</Link></li>
+                <li><Link to="/post-jobs" className="hover:text-white transition-colors">Post Jobs</Link></li>
                 <li><Link to="/job-seekers" className="hover:text-white transition-colors">Job Seekers</Link></li>
               </ul>
             </div>
