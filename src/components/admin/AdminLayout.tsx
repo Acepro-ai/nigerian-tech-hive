@@ -97,7 +97,7 @@ const AdminLayout = () => {
             <Shield className="h-8 w-8 text-white" />
             <div className="text-white">
               <div className="text-xl font-bold">Admin Panel</div>
-              <div className="text-xs text-red-100">Marvel Recruit</div>
+              <div className="text-xs text-red-100">Nigerian Tech Hive</div>
             </div>
           </div>
         </div>
@@ -182,7 +182,7 @@ const AdminLayout = () => {
                 </div>
                 <div className="hidden md:block">
                   <div className="text-sm font-medium text-gray-900 dark:text-white">Admin User</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">admin@marvelrecruit.com</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">admin@nigerian-tech-hive.com</div>
                 </div>
               </div>
             </div>

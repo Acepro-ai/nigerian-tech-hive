@@ -8,15 +8,34 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Briefcase, Users, MapPin, Clock, DollarSign, Building2, Star } from 'lucide-react';
-import { useSearchParams } from 'react-router-dom';
+import { Briefcase, Users, MapPin, Clock, DollarSign, Building2, Star, AlertCircle } from 'lucide-react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { getCurrentSession, createNewSession, isPremiumUser, getUserPlan } from '@/libs/userSession';
 
 const PostJobs = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState<'plans' | 'form'>('plans');
   const [selectedPlan, setSelectedPlan] = useState<'basic' | 'professional' | 'enterprise' | null>(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
-  const [userEmail, setUserEmail] = useState('employer@company.com'); // This should come from auth
+  const [isPremium, setIsPremium] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+
+  // Check user session and premium status on mount
+  useEffect(() => {
+    const session = getCurrentSession();
+    if (session) {
+      setIsPremium(session.hasPaid);
+      setUserEmail(session.email || '');
+      if (session.hasPaid) {
+        setCurrentStep('form');
+        setSelectedPlan(session.paidPlan || null);
+      }
+    } else {
+      // Create new session for new users
+      createNewSession();
+    }
+  }, []);
 
   // Check if user is coming from successful payment
   useEffect(() => {
@@ -25,6 +44,7 @@ const PostJobs = () => {
     
     if (paid === 'true' && plan) {
       setSelectedPlan(plan);
+      setIsPremium(true);
       setCurrentStep('form');
     }
   }, [searchParams]);
@@ -94,8 +114,40 @@ const PostJobs = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Redirect non-premium users to plans
+  useEffect(() => {
+    if (!isPremium && currentStep === 'form') {
+      setCurrentStep('plans');
+    }
+  }, [isPremium, currentStep]);
+
+  // If user is not premium and trying to access form directly, show access denied
+  if (!isPremium && currentStep === 'form') {
+    return (
+      <Layout>
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Card className="text-center">
+              <CardContent className="p-8">
+                <AlertCircle className="h-16 w-16 text-red-500 mx-auto mb-4" />
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  Premium Access Required
+                </h1>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  You need to purchase a premium plan to post jobs and access our talent pool.
+                </p>
+                <Button onClick={() => setCurrentStep('plans')} className="bg-red-600 hover:bg-red-700">
+                  View Plans
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     
     // Basic form validation
     if (!jobFormData.title || !jobFormData.company || !jobFormData.description) {
@@ -103,38 +155,57 @@ const PostJobs = () => {
       return;
     }
 
-    // Simulate job posting submission
-    const jobPosting = {
-      ...jobFormData,
-      id: Date.now().toString(),
-      status: 'active',
-      plan: selectedPlan,
-      postedDate: new Date().toISOString().split('T')[0],
-      applicants: 0,
-      views: 0
-    };
+    // Get current session for user identification
+    const session = getCurrentSession();
+    if (!session) {
+      alert('Session expired. Please refresh the page and try again.');
+      return;
+    }
 
-    console.log('Job posted successfully:', jobPosting);
-    
-    // Show success message
-    alert('Job posted successfully! Your job listing is now live and candidates can start applying.');
-    
-    // Reset form or redirect
-    setJobFormData({
-      title: '',
-      company: '',
-      location: '',
-      type: '',
-      experience: '',
-      salary: '',
-      description: '',
-      requirements: '',
-      benefits: '',
-      skills: []
-    });
-    
-    // You could redirect to a success page or dashboard here
-    // navigate('/employer-dashboard');
+    try {
+      // Simulate job posting submission (replace with actual API call)
+      const jobPosting = {
+        ...jobFormData,
+        id: Date.now().toString(),
+        sessionId: session.sessionId,
+        status: 'active',
+        plan: selectedPlan,
+        postedDate: new Date().toISOString().split('T')[0],
+        applicants: 0,
+        views: 0
+      };
+
+      // In a real app, this would be an API call to save the job
+      console.log('Job posted successfully:', jobPosting);
+      
+      // Store job locally for demo purposes (replace with API)
+      const existingJobs = JSON.parse(localStorage.getItem('nth_jobs') || '[]');
+      existingJobs.push(jobPosting);
+      localStorage.setItem('nth_jobs', JSON.stringify(existingJobs));
+
+      // Show success message and redirect
+      alert('Job posted successfully! Your job listing is now live and candidates can start applying.');
+      
+      // Reset form
+      setJobFormData({
+        title: '',
+        company: '',
+        location: '',
+        type: '',
+        experience: '',
+        salary: '',
+        description: '',
+        requirements: '',
+        benefits: '',
+        skills: []
+      });
+      
+      // Redirect to success page or dashboard
+      navigate('/employer-dashboard');
+    } catch (error) {
+      console.error('Error posting job:', error);
+      alert('Failed to post job. Please try again.');
+    }
   };
 
   if (currentStep === 'plans') {

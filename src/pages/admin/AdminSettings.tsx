@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,26 +22,26 @@ import {
 const AdminSettings = () => {
   const [settings, setSettings] = useState({
     // General Settings
-    siteName: 'Marvel Recruit',
+    siteName: 'Nigerian Tech Hive',
     siteDescription: 'Connecting Nigerian tech talent with global opportunities',
-    siteUrl: 'https://marvelrecruit.com',
+    siteUrl: 'https://nigerian-tech-hive.com',
     
     // Email Settings
     emailNotifications: true,
-    adminEmail: 'admin@marvelrecruit.com',
-    smtpHost: 'smtp.gmail.com',
-    smtpPort: '587',
+    adminEmail: 'admin@nigerian-tech-hive.com',
+    smtpHost: '',
+    smtpPort: '',
     
     // Payment Settings
-    paystackPublicKey: 'pk_live_60e482d0d8784edb5bb19b5f812d8bc07f8a1817',
-    paystackSecretKey: '••••••••••••••••••••••••••••••••',
+    paystackPublicKey: '',
+    paystackSecretKey: '',
     enablePayments: true,
     
     // Platform Settings
-    jobApprovalRequired: true,
+    jobApprovalRequired: false,
     userVerificationRequired: false,
-    maxJobsPerEmployer: 10,
-    jobExpiryDays: 30,
+    maxJobsPerEmployer: 50,
+    jobExpiryDays: 90,
     
     // Security Settings
     enableTwoFactor: false,
@@ -55,6 +55,14 @@ const AdminSettings = () => {
     enableNotifications: true
   });
 
+  // Load settings from localStorage on component mount
+  useEffect(() => {
+    const savedSettings = localStorage.getItem('nth_admin_settings');
+    if (savedSettings) {
+      setSettings(JSON.parse(savedSettings));
+    }
+  }, []);
+
   const handleSettingChange = (key: string, value: any) => {
     setSettings(prev => ({
       ...prev,
@@ -63,8 +71,7 @@ const AdminSettings = () => {
   };
 
   const handleSaveSettings = () => {
-    console.log('Saving settings:', settings);
-    // Here you would save the settings to your backend
+    localStorage.setItem('nth_admin_settings', JSON.stringify(settings));
     alert('Settings saved successfully!');
   };
 

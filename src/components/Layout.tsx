@@ -15,6 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getCurrentSession } from "@/libs/userSession";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -23,6 +24,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showAdminButton, setShowAdminButton] = useState(false);
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
@@ -36,6 +38,15 @@ const Layout = ({ children }: LayoutProps) => {
         document.documentElement.classList.add('dark');
       }
     }
+
+    // Check for admin access
+    // Admin emails: zongsevenonline@gmail.com, mygamingace@gmail.com
+    // Or manually enable with: localStorage.setItem('admin_access', 'true')
+    const session = getCurrentSession();
+    const adminEmails = ['zongsevenonline@gmail.com', 'mygamingace@gmail.com'];
+    const isAdminUser = session?.email && adminEmails.includes(session.email);
+    const adminAccess = localStorage.getItem('admin_access') === 'true' || isAdminUser;
+    setShowAdminButton(adminAccess);
   }, []);
 
   const toggleDarkMode = () => {
@@ -64,6 +75,24 @@ const Layout = ({ children }: LayoutProps) => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
+              <Link
+                to="/hire"
+                className={`text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors ${
+                  isActive('/hire') ? 'text-red-600 dark:text-red-400 font-medium' : ''
+                }`}
+              >
+                Hire Talent
+              </Link>
+
+              <Link
+                to="/jobs"
+                className={`text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors ${
+                  isActive('/jobs') ? 'text-red-600 dark:text-red-400 font-medium' : ''
+                }`}
+              >
+                Find Jobs
+              </Link>
+
               <DropdownMenu>
                 <DropdownMenuTrigger className="flex items-center text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors">
                   Industries <ChevronDown className="ml-1 h-4 w-4" />
@@ -78,15 +107,6 @@ const Layout = ({ children }: LayoutProps) => {
                   <DropdownMenuItem asChild>
                     <Link to="/industries/software" className="w-full dark:text-gray-300">Software and Services</Link>
                   </DropdownMenuItem>
-                  {/* <DropdownMenuItem disabled>
-                    <span className="w-full text-gray-400">Healthcare (Coming Soon)</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem disabled>
-                    <span className="w-full text-gray-400">E-commerce (Coming Soon)</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem disabled>
-                    <span className="w-full text-gray-400">EdTech (Coming Soon)</span>
-                  </DropdownMenuItem> */}
                 </DropdownMenuContent>
               </DropdownMenu>
 
@@ -97,15 +117,6 @@ const Layout = ({ children }: LayoutProps) => {
                 }`}
               >
                 Hire Nigerian Experts
-              </Link>
-
-              <Link
-                to="/post-jobs"
-                className={`text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors ${
-                  isActive('/post-jobs') ? 'text-red-600 dark:text-red-400 font-medium' : ''
-                }`}
-              >
-                Post Jobs
               </Link>
 
               <Link
@@ -126,14 +137,16 @@ const Layout = ({ children }: LayoutProps) => {
                 Blog
               </Link>
 
-              <Link
-                to="/admin"
-                className={`text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors ${
-                  isActive('/admin') ? 'text-red-600 dark:text-red-400 font-medium' : ''
-                }`}
-              >
-                Admin
-              </Link>
+              {showAdminButton && (
+                <Link
+                  to="/admin"
+                  className={`text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors ${
+                    isActive('/admin') ? 'text-red-600 dark:text-red-400 font-medium' : ''
+                  }`}
+                >
+                  Admin
+                </Link>
+              )}
 
               <Button
                 onClick={toggleDarkMode}
@@ -167,6 +180,22 @@ const Layout = ({ children }: LayoutProps) => {
           {/* Mobile Navigation */}
           {isMenuOpen && (
             <div className="md:hidden py-4 space-y-4">
+              <Link
+                to="/hire"
+                className="block text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Hire Talent
+              </Link>
+
+              <Link
+                to="/jobs"
+                className="block text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Find Jobs
+              </Link>
+
               <div className="space-y-2">
                 <div className="text-gray-700 dark:text-gray-300 font-medium">Industries</div>
                 <Link
@@ -190,9 +219,6 @@ const Layout = ({ children }: LayoutProps) => {
                 >
                   Software and Services
                 </Link>
-                {/* <div className="pl-4 text-gray-400">Healthcare (Coming Soon)</div>
-                <div className="pl-4 text-gray-400">E-commerce (Coming Soon)</div>
-                <div className="pl-4 text-gray-400">EdTech (Coming Soon)</div> */}
               </div>
 
               <Link
@@ -201,14 +227,6 @@ const Layout = ({ children }: LayoutProps) => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Hire Nigerian Experts
-              </Link>
-
-              <Link
-                to="/post-jobs"
-                className="block text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Post Jobs
               </Link>
 
               <Link
@@ -227,13 +245,15 @@ const Layout = ({ children }: LayoutProps) => {
                 Blog
               </Link>
 
-              <Link
-                to="/admin"
-                className="block text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Admin
-              </Link>
+              {showAdminButton && (
+                <Link
+                  to="/admin"
+                  className="block text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Admin
+                </Link>
+              )}
             </div>
           )}
         </div>
@@ -273,7 +293,7 @@ const Layout = ({ children }: LayoutProps) => {
               <h3 className="font-semibold mb-4">Services</h3>
               <ul className="space-y-2 text-gray-400">
                 <li><Link to="/hire-nigerian-experts" className="hover:text-white transition-colors">Hire Nigerian Experts</Link></li>
-                <li><Link to="/post-jobs" className="hover:text-white transition-colors">Post Jobs</Link></li>
+                <li><Link to="/hire" className="hover:text-white transition-colors">Get Started Hiring</Link></li>
                 <li><Link to="/job-seekers" className="hover:text-white transition-colors">Job Seekers</Link></li>
               </ul>
             </div>
@@ -289,7 +309,7 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
           
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 MarvelRecruit. All rights reserved.</p>
+            <p>&copy; 2024 Nigerian Tech Hive. All rights reserved.</p>
           </div>
         </div>
       </footer>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
   BarChart3, 
@@ -12,46 +12,196 @@ import {
 } from 'lucide-react';
 
 const AdminAnalytics = () => {
-  // Mock analytics data - in a real app this would come from your backend
-  const analyticsData = {
+  const [analyticsData, setAnalyticsData] = useState({
     userGrowth: {
-      thisMonth: 234,
-      lastMonth: 189,
-      growth: 23.8
+      thisMonth: 0,
+      lastMonth: 0,
+      growth: 0
     },
     jobPostings: {
-      thisMonth: 45,
-      lastMonth: 38,
-      growth: 18.4
+      thisMonth: 0,
+      lastMonth: 0,
+      growth: 0
     },
     revenue: {
-      thisMonth: 1250000,
-      lastMonth: 980000,
-      growth: 27.6
+      thisMonth: 0,
+      lastMonth: 0,
+      growth: 0
     },
     applications: {
-      thisMonth: 892,
-      lastMonth: 743,
-      growth: 20.1
+      thisMonth: 0,
+      lastMonth: 0,
+      growth: 0
     }
-  };
+  });
 
-  const monthlyData = [
-    { month: 'Jan', users: 120, jobs: 25, revenue: 650000 },
-    { month: 'Feb', users: 145, jobs: 32, revenue: 780000 },
-    { month: 'Mar', users: 178, jobs: 28, revenue: 720000 },
-    { month: 'Apr', users: 210, jobs: 35, revenue: 890000 },
-    { month: 'May', users: 189, jobs: 38, revenue: 980000 },
-    { month: 'Jun', users: 234, jobs: 45, revenue: 1250000 }
-  ];
+  const [monthlyData, setMonthlyData] = useState<any[]>([]);
+  const [topPerformingJobs, setTopPerformingJobs] = useState<any[]>([]);
+  const [jobs, setJobs] = useState<any[]>([]);
+  const [sessions, setSessions] = useState<any[]>([]);
 
-  const topPerformingJobs = [
-    { title: 'Senior React Developer', applications: 45, views: 234 },
-    { title: 'DevOps Engineer', applications: 38, views: 198 },
-    { title: 'Mobile App Developer', applications: 32, views: 176 },
-    { title: 'Full Stack Developer', applications: 29, views: 165 },
-    { title: 'Data Scientist', applications: 25, views: 143 }
-  ];
+  // Load and calculate analytics data
+  useEffect(() => {
+    const loadAnalytics = () => {
+      const sessions = JSON.parse(localStorage.getItem('nth_sessions') || '[]');
+      const jobs = JSON.parse(localStorage.getItem('nth_jobs') || '[]');
+
+      const now = new Date();
+      const thisMonth = now.getMonth();
+      const thisYear = now.getFullYear();
+      const lastMonth = thisMonth === 0 ? 11 : thisMonth - 1;
+      const lastMonthYear = thisMonth === 0 ? thisYear - 1 : thisYear;
+
+      // Calculate user growth
+      const thisMonthUsers = sessions.filter((session: any) => {
+        const sessionDate = new Date(session.createdAt);
+        return sessionDate.getMonth() === thisMonth && sessionDate.getFullYear() === thisYear;
+      }).length;
+
+      const lastMonthUsers = sessions.filter((session: any) => {
+        const sessionDate = new Date(session.createdAt);
+        return sessionDate.getMonth() === lastMonth && sessionDate.getFullYear() === lastMonthYear;
+      }).length;
+
+      // Calculate job postings
+      const thisMonthJobs = jobs.filter((job: any) => {
+        const jobDate = new Date(job.createdAt);
+        return jobDate.getMonth() === thisMonth && jobDate.getFullYear() === thisYear;
+      }).length;
+
+      const lastMonthJobs = jobs.filter((job: any) => {
+        const jobDate = new Date(job.createdAt);
+        return jobDate.getMonth() === lastMonth && jobDate.getFullYear() === lastMonthYear;
+      }).length;
+
+      // Calculate revenue
+      const thisMonthRevenue = sessions
+        .filter((session: any) => session.hasPaid && session.paidAt)
+        .filter((session: any) => {
+          const paidDate = new Date(session.paidAt);
+          return paidDate.getMonth() === thisMonth && paidDate.getFullYear() === thisYear;
+        })
+        .reduce((total: number, session: any) => {
+          const planPrices: { [key: string]: number } = {
+            basic: 25000,
+            professional: 75000,
+            enterprise: 150000
+          };
+          return total + (planPrices[session.paidPlan] || 0);
+        }, 0);
+
+      const lastMonthRevenue = sessions
+        .filter((session: any) => session.hasPaid && session.paidAt)
+        .filter((session: any) => {
+          const paidDate = new Date(session.paidAt);
+          return paidDate.getMonth() === lastMonth && paidDate.getFullYear() === lastMonthYear;
+        })
+        .reduce((total: number, session: any) => {
+          const planPrices: { [key: string]: number } = {
+            basic: 25000,
+            professional: 75000,
+            enterprise: 150000
+          };
+          return total + (planPrices[session.paidPlan] || 0);
+        }, 0);
+
+      // Calculate applications (using job views as proxy)
+      const thisMonthApplications = jobs
+        .filter((job: any) => {
+          const jobDate = new Date(job.createdAt);
+          return jobDate.getMonth() === thisMonth && jobDate.getFullYear() === thisYear;
+        })
+        .reduce((total: number, job: any) => total + (job.views || 0), 0);
+
+      const lastMonthApplications = jobs
+        .filter((job: any) => {
+          const jobDate = new Date(job.createdAt);
+          return jobDate.getMonth() === lastMonth && jobDate.getFullYear() === lastMonthYear;
+        })
+        .reduce((total: number, job: any) => total + (job.views || 0), 0);
+
+      // Calculate monthly data for the last 6 months
+      const monthlyStats = [];
+      for (let i = 5; i >= 0; i--) {
+        const monthDate = new Date(thisYear, thisMonth - i, 1);
+        const month = monthDate.getMonth();
+        const year = monthDate.getFullYear();
+        const monthName = monthDate.toLocaleString('default', { month: 'short' });
+
+        const monthUsers = sessions.filter((session: any) => {
+          const sessionDate = new Date(session.createdAt);
+          return sessionDate.getMonth() === month && sessionDate.getFullYear() === year;
+        }).length;
+
+        const monthJobs = jobs.filter((job: any) => {
+          const jobDate = new Date(job.createdAt);
+          return jobDate.getMonth() === month && jobDate.getFullYear() === year;
+        }).length;
+
+        const monthRevenue = sessions
+          .filter((session: any) => session.hasPaid && session.paidAt)
+          .filter((session: any) => {
+            const paidDate = new Date(session.paidAt);
+            return paidDate.getMonth() === month && paidDate.getFullYear() === year;
+          })
+          .reduce((total: number, session: any) => {
+            const planPrices: { [key: string]: number } = {
+              basic: 25000,
+              professional: 75000,
+              enterprise: 150000
+            };
+            return total + (planPrices[session.paidPlan] || 0);
+          }, 0);
+
+        monthlyStats.push({
+          month: monthName,
+          users: monthUsers,
+          jobs: monthJobs,
+          revenue: monthRevenue
+        });
+      }
+
+      // Calculate top performing jobs
+      const jobPerformance = jobs.map((job: any) => ({
+        title: job.title,
+        applications: job.views || 0,
+        views: job.views || 0
+      })).sort((a, b) => b.applications - a.applications).slice(0, 5);
+
+      setAnalyticsData({
+        userGrowth: {
+          thisMonth: thisMonthUsers,
+          lastMonth: lastMonthUsers,
+          growth: lastMonthUsers > 0 ? ((thisMonthUsers - lastMonthUsers) / lastMonthUsers) * 100 : 0
+        },
+        jobPostings: {
+          thisMonth: thisMonthJobs,
+          lastMonth: lastMonthJobs,
+          growth: lastMonthJobs > 0 ? ((thisMonthJobs - lastMonthJobs) / lastMonthJobs) * 100 : 0
+        },
+        revenue: {
+          thisMonth: thisMonthRevenue,
+          lastMonth: lastMonthRevenue,
+          growth: lastMonthRevenue > 0 ? ((thisMonthRevenue - lastMonthRevenue) / lastMonthRevenue) * 100 : 0
+        },
+        applications: {
+          thisMonth: thisMonthApplications,
+          lastMonth: lastMonthApplications,
+          growth: lastMonthApplications > 0 ? ((thisMonthApplications - lastMonthApplications) / lastMonthApplications) * 100 : 0
+        }
+      });
+
+      setMonthlyData(monthlyStats);
+      setTopPerformingJobs(jobPerformance);
+      setJobs(jobs);
+      setSessions(sessions);
+    };
+
+    loadAnalytics();
+    // Refresh analytics every 30 seconds
+    const interval = setInterval(loadAnalytics, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   const MetricCard = ({ title, value, previousValue, icon: Icon, format = 'number' }: {
     title: string;
@@ -222,7 +372,7 @@ const AdminAnalytics = () => {
           </CardContent>
         </Card>
 
-        {/* Platform Health */}
+      {/* Platform Health */}
         <Card>
           <CardHeader>
             <CardTitle>Platform Health</CardTitle>
@@ -231,19 +381,39 @@ const AdminAnalytics = () => {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-gray-600 dark:text-gray-400">Success Rate</span>
-                <span className="font-bold text-green-600">94.2%</span>
+                <span className="font-bold text-green-600">
+                  {jobs.length > 0 ? ((jobs.filter(job => job.views > 0).length / jobs.length) * 100).toFixed(1) : 0}%
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-600 dark:text-gray-400">Average Response Time</span>
-                <span className="font-bold text-blue-600">24 hours</span>
+                <span className="font-bold text-blue-600">
+                  {sessions.length > 0 ? Math.round(sessions.reduce((acc: number, session: any) => {
+                    const responseTime = new Date(session.lastActivity).getTime() - new Date(session.createdAt).getTime();
+                    return acc + (responseTime / (1000 * 60 * 60)); // Convert to hours
+                  }, 0) / sessions.length) : 0} hours
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-600 dark:text-gray-400">User Retention</span>
-                <span className="font-bold text-purple-600">87.5%</span>
+                <span className="font-bold text-purple-600">
+                  {(() => {
+                    const activeSessions = sessions.filter((session: any) => {
+                      const lastActivity = new Date(session.lastActivity);
+                      const now = new Date();
+                      const daysSinceActivity = (now.getTime() - lastActivity.getTime()) / (1000 * 60 * 60 * 24);
+                      return daysSinceActivity <= 30; // Active in last 30 days
+                    });
+                    return sessions.length > 0 ? ((activeSessions.length / sessions.length) * 100).toFixed(1) : 0;
+                  })()}%
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-600 dark:text-gray-400">Payment Success Rate</span>
-                <span className="font-bold text-green-600">98.9%</span>
+                <span className="font-bold text-green-600">
+                  {sessions.filter(s => s.hasPaid).length > 0 ? 
+                    ((sessions.filter(s => s.hasPaid && s.paidAt).length / sessions.filter(s => s.hasPaid).length) * 100).toFixed(1) : 0}%
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-600 dark:text-gray-400">Platform Uptime</span>

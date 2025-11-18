@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,9 +6,9 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Users, 
-  Search, 
+import {
+  Users,
+  Search,
   MoreVertical,
   Edit,
   Trash2,
@@ -37,9 +37,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-
-interface User {
+} from "@/components/ui/dialog";interface User {
   id: string;
   name: string;
   email: string;
@@ -63,79 +61,48 @@ const AdminUserManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [userTypeFilter, setUserTypeFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [selectedUser, setSelectedUser] = useState<any | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [users, setUsers] = useState<any[]>([]);
 
-  // Mock data - in a real app this would come from your backend
-  const [users, setUsers] = useState<User[]>([
-    {
-      id: '1',
-      name: 'John Okafor',
-      email: 'john.okafor@email.com',
-      type: 'job_seeker',
-      status: 'active',
-      plan: 'premium',
-      joinDate: '2024-08-15',
-      lastActive: '2024-10-14',
-      location: 'Lagos, Nigeria',
-      skills: ['React', 'Node.js', 'TypeScript', 'Python'],
-      experience: '5+ years'
-    },
-    {
-      id: '2',
-      name: 'Sarah Ahmed',
-      email: 'sarah.ahmed@example.com',
-      type: 'job_seeker',
-      status: 'active',
-      plan: 'free',
-      joinDate: '2024-09-10',
-      lastActive: '2024-10-13',
-      location: 'Abuja, Nigeria',
-      skills: ['Flutter', 'Dart', 'Firebase'],
-      experience: '3+ years'
-    },
-    {
-      id: '3',
-      name: 'TechCorp Nigeria',
-      email: 'hr@techcorp.ng',
-      type: 'employer',
-      status: 'active',
-      plan: 'professional',
-      joinDate: '2024-07-20',
-      lastActive: '2024-10-14',
-      location: 'Lagos, Nigeria',
-      company: 'TechCorp Nigeria',
-      jobsPosted: 5,
-      totalSpent: 375000
-    },
-    {
-      id: '4',
-      name: 'StartupXYZ',
-      email: 'jobs@startupxyz.com',
-      type: 'employer',
-      status: 'pending',
-      plan: 'basic',
-      joinDate: '2024-10-12',
-      lastActive: '2024-10-12',
-      location: 'Remote',
-      company: 'StartupXYZ',
-      jobsPosted: 1,
-      totalSpent: 25000
-    },
-    {
-      id: '5',
-      name: 'David Nkem',
-      email: 'david.nkem@gmail.com',
-      type: 'job_seeker',
-      status: 'suspended',
-      plan: 'free',
-      joinDate: '2024-06-05',
-      lastActive: '2024-09-20',
-      location: 'Port Harcourt, Nigeria',
-      skills: ['Java', 'Spring Boot', 'MySQL'],
-      experience: '4+ years'
-    }
-  ]);
+  // Load users from localStorage (sessions)
+  useEffect(() => {
+    const loadUsers = () => {
+      const sessions = JSON.parse(localStorage.getItem('nth_sessions') || '[]');
+      const jobs = JSON.parse(localStorage.getItem('nth_jobs') || '[]');
+
+      const userData = sessions.map((session: any) => {
+        const userJobs = jobs.filter((job: any) => job.sessionId === session.sessionId);
+        const totalSpent = session.hasPaid ?
+          (session.paidPlan === 'basic' ? 25000 :
+           session.paidPlan === 'professional' ? 75000 :
+           session.paidPlan === 'enterprise' ? 150000 : 0) : 0;
+
+        return {
+          id: session.sessionId,
+          name: session.email || `User ${session.sessionId.slice(0, 8)}`,
+          email: session.email || 'No email provided',
+          type: session.hasPaid ? 'employer' : 'job_seeker',
+          status: 'active', // All sessions are considered active
+          plan: session.hasPaid ? session.paidPlan : 'free',
+          joinDate: new Date(session.createdAt).toISOString().split('T')[0],
+          lastActive: new Date(session.lastActivity).toISOString().split('T')[0],
+          location: 'Nigeria', // Default location
+          jobsPosted: userJobs.length,
+          totalSpent,
+          skills: [], // Would need to be collected separately
+          experience: 'Not specified' // Would need to be collected separately
+        };
+      });
+
+      setUsers(userData);
+    };
+
+    loadUsers();
+    // Refresh users every 10 seconds
+    const interval = setInterval(loadUsers, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   const filteredUsers = users.filter(user => {
     const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

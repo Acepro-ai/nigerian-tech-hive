@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2, CheckCircle2, XCircle, Star, Zap, Crown } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
+import { updateSessionPayment } from "@/libs/userSession";
 
 declare global {
   interface Window {
@@ -109,6 +110,8 @@ const EmployerPaymentModal = ({
       callback: (response: any) => {
         if (response.reference) {
           setStatus("success");
+          // Update session with payment information
+          updateSessionPayment(selectedPlan, userEmail);
           onPaymentSuccess();
           toast({
             title: "Payment Successful!",
@@ -117,7 +120,7 @@ const EmployerPaymentModal = ({
           // Redirect to success page after a short delay
           setTimeout(() => {
             onClose();
-            navigate("/employer-payment-success");
+            navigate(`/employer-payment-success?plan=${selectedPlan}`);
           }, 1500);
         } else {
           setStatus("failed");

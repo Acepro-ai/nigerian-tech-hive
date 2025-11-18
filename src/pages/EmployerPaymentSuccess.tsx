@@ -3,13 +3,17 @@ import Layout from '@/components/Layout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Briefcase, Users, MessageSquare, BarChart3, Star, Crown, Zap } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { getCurrentSession } from '@/libs/userSession';
 
 const EmployerPaymentSuccess = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-  // In a real app, you'd get this from URL params or state
-  const planType = 'professional'; // This should come from the payment process
+  // Get plan from URL params or session
+  const planType = (searchParams.get('plan') as 'basic' | 'professional' | 'enterprise') || 
+                   getCurrentSession()?.paidPlan || 
+                   'professional';
 
   const planDetails = {
     basic: {

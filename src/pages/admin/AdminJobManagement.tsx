@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { 
-  Briefcase, 
-  Search, 
+import {
+  Briefcase,
+  Search,
   Filter,
   MoreVertical,
   Edit,
@@ -34,95 +34,53 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-
-interface Job {
+} from "@/components/ui/dialog";interface Job {
   id: string;
   title: string;
   company: string;
   location: string;
   type: string;
+  experience: string;
   salary: string;
   description: string;
   requirements: string;
+  benefits: string;
   skills: string[];
+  sessionId: string;
   status: 'active' | 'pending' | 'expired' | 'paused';
   plan: 'basic' | 'professional' | 'enterprise';
   postedDate: string;
-  expiryDate: string;
   applicants: number;
   views: number;
-  employerId: string;
-  employerEmail: string;
 }
 
 const AdminJobManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [selectedJob, setSelectedJob] = useState<any | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [jobs, setJobs] = useState<any[]>([]);
 
-  // Mock data - in a real app this would come from your backend
-  const [jobs, setJobs] = useState<Job[]>([
-    {
-      id: '1',
-      title: 'Senior React Developer',
-      company: 'TechCorp Nigeria',
-      location: 'Remote',
-      type: 'Full-time',
-      salary: '$4,000 - $6,000/month',
-      description: 'We are looking for an experienced React developer...',
-      requirements: 'Bachelor\'s degree in Computer Science, 5+ years experience...',
-      skills: ['React', 'TypeScript', 'Node.js', 'GraphQL'],
-      status: 'active',
-      plan: 'professional',
-      postedDate: '2024-10-10',
-      expiryDate: '2024-12-10',
-      applicants: 24,
-      views: 156,
-      employerId: 'emp1',
-      employerEmail: 'hr@techcorp.ng'
-    },
-    {
-      id: '2',
-      title: 'Mobile App Developer',
-      company: 'StartupXYZ',
-      location: 'Lagos, Nigeria',
-      type: 'Contract',
-      salary: '₦3M - ₦4M/year',
-      description: 'Looking for a skilled mobile developer for our fintech app...',
-      requirements: 'Experience with React Native or Flutter, 3+ years...',
-      skills: ['React Native', 'JavaScript', 'Firebase', 'API Integration'],
-      status: 'pending',
-      plan: 'basic',
-      postedDate: '2024-10-12',
-      expiryDate: '2024-11-12',
-      applicants: 8,
-      views: 89,
-      employerId: 'emp2',
-      employerEmail: 'jobs@startupxyz.com'
-    },
-    {
-      id: '3',
-      title: 'DevOps Engineer',
-      company: 'CloudTech Solutions',
-      location: 'Abuja, Nigeria',
-      type: 'Full-time',
-      salary: '$5,000 - $7,000/month',
-      description: 'We need a DevOps engineer to manage our cloud infrastructure...',
-      requirements: 'AWS/Azure certification, Docker, Kubernetes experience...',
-      skills: ['AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Terraform'],
-      status: 'active',
-      plan: 'enterprise',
-      postedDate: '2024-10-08',
-      expiryDate: '2024-01-08',
-      applicants: 15,
-      views: 203,
-      employerId: 'emp3',
-      employerEmail: 'hiring@cloudtech.ng'
+  // Load jobs from localStorage
+  useEffect(() => {
+    const loadJobs = () => {
+      const storedJobs = JSON.parse(localStorage.getItem('nth_jobs') || '[]');
+      setJobs(storedJobs);
+    };
+
+    loadJobs();
+    // Refresh jobs every 5 seconds to show real-time updates
+    const interval = setInterval(loadJobs, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Save jobs to localStorage whenever jobs change
+  useEffect(() => {
+    if (jobs.length > 0) {
+      localStorage.setItem('nth_jobs', JSON.stringify(jobs));
     }
-  ]);
+  }, [jobs]);
 
   const filteredJobs = jobs.filter(job => {
     const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -173,9 +131,11 @@ const AdminJobManagement = () => {
       company: job?.company || '',
       location: job?.location || '',
       type: job?.type || '',
+      experience: job?.experience || '',
       salary: job?.salary || '',
       description: job?.description || '',
       requirements: job?.requirements || '',
+      benefits: job?.benefits || '',
       skills: job?.skills?.join(', ') || ''
     });
 
@@ -227,16 +187,24 @@ const AdminJobManagement = () => {
                 <SelectItem value="Part-time">Part-time</SelectItem>
                 <SelectItem value="Contract">Contract</SelectItem>
                 <SelectItem value="Freelance">Freelance</SelectItem>
+                <SelectItem value="Internship">Internship</SelectItem>
                 <SelectItem value="Remote">Remote</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">Salary</label>
-            <Input
-              value={formData.salary}
-              onChange={(e) => setFormData({...formData, salary: e.target.value})}
-            />
+            <label className="block text-sm font-medium mb-2">Experience Level</label>
+            <Select onValueChange={(value) => setFormData({...formData, experience: value})}>
+              <SelectTrigger>
+                <SelectValue placeholder={formData.experience || "Select experience"} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Entry Level (0-2 years)">Entry Level (0-2 years)</SelectItem>
+                <SelectItem value="Mid Level (3-5 years)">Mid Level (3-5 years)</SelectItem>
+                <SelectItem value="Senior Level (6-10 years)">Senior Level (6-10 years)</SelectItem>
+                <SelectItem value="Lead/Principal (10+ years)">Lead/Principal (10+ years)</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 
@@ -251,11 +219,30 @@ const AdminJobManagement = () => {
         </div>
 
         <div>
+          <label className="block text-sm font-medium mb-2">Salary Range</label>
+          <Input
+            value={formData.salary}
+            onChange={(e) => setFormData({...formData, salary: e.target.value})}
+            placeholder="e.g. $3,000 - $5,000/month or ₦2M - ₦3M/year"
+          />
+        </div>
+
+        <div>
           <label className="block text-sm font-medium mb-2">Requirements</label>
           <Textarea
             value={formData.requirements}
             onChange={(e) => setFormData({...formData, requirements: e.target.value})}
             rows={3}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">Benefits & Perks</label>
+          <Textarea
+            value={formData.benefits}
+            onChange={(e) => setFormData({...formData, benefits: e.target.value})}
+            rows={3}
+            placeholder="Describe benefits, perks, growth opportunities..."
           />
         </div>
 
@@ -301,17 +288,15 @@ const AdminJobManagement = () => {
             </DialogHeader>
             <JobForm
               onSave={(jobData) => {
-                const newJob: Job = {
-                  id: (jobs.length + 1).toString(),
+                const newJob = {
+                  id: Date.now().toString(),
                   ...jobData,
-                  status: 'active' as const,
-                  plan: 'basic' as const,
+                  sessionId: 'admin',
+                  status: 'active',
+                  plan: 'basic',
                   postedDate: new Date().toISOString().split('T')[0],
-                  expiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
                   applicants: 0,
-                  views: 0,
-                  employerId: 'admin',
-                  employerEmail: 'admin@marvelrecruit.com'
+                  views: 0
                 };
                 setJobs([...jobs, newJob]);
                 setIsAddModalOpen(false);
